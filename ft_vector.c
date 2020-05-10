@@ -6,7 +6,7 @@
 /*   By: novan-ve <novan-ve@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/10 12:19:14 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/10 12:36:33 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/10 12:43:55 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void		ft_vector_add(t_minishell *sh, void *s)
 {
 	if (sh->capacity == sh->total)
 		ft_vector_resize(sh, sh->capacity * 2);
-	sh->total++;
 	sh->env[sh->total] = s;
+	sh->total++;
 }
 
 void		ft_vector_set(t_minishell *sh, int index, void *s)
