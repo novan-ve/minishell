@@ -6,7 +6,7 @@
 /*   By: novan-ve <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/10 12:33:17 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/10 14:47:07 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void			ft_pwd(t_minishell *sh);
 int				ft_echo(t_minishell *sh);
 
 void			*ft_realloc(void *ptr, size_t prev, size_t new);
+void			*ft_memcpy(void *dst, const void *src, size_t n);
 int				ft_isspace(char c);
 size_t			ft_strlen(const char *s);
 void			ft_putstr(char *s);
@@ -58,7 +59,7 @@ int				ft_strcmp(const char *s1, const char *s2);
 
 void			ft_vector_init(t_minishell *sh);
 int				ft_vector_total(t_minishell *sh);
-static void		ft_vector_resize(t_minishell *sh, int x);
+static void		ft_vector_resize(t_minishell *sh, int capacity);
 void			ft_vector_add(t_minishell *sh, void *s);
 void			ft_vector_set(t_minishell *sh, int index, void *s);
 void			*ft_vector_get(t_minishell *sh, int index);

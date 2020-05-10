@@ -6,7 +6,7 @@
 /*   By: novan-ve <novan-ve@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/10 12:19:14 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/10 12:43:55 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/10 14:48:22 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,19 @@ int			ft_vector_total(t_minishell *sh)
 	return (sh->total);
 }
 
-static void	ft_vector_resize(t_minishell *sh, int x)
+static void	ft_vector_resize(t_minishell *sh, int capacity)
 {
 	void	**items;
 
-	items = ft_realloc(sh->env, sh->capacity, sizeof(void *) * x);
+	printf("vector_resize: %d to %d\n", sh->capacity, capacity);
+	items = ft_realloc(sh->env, sh->capacity * sizeof(void *), capacity * sizeof(void *));
 	if (!items)
 	{
 		ft_putendl("Minishell: vector resize failed");
 		exit(EXIT_FAILURE);
 	}
 	sh->env = items;
-	sh->capacity = x;
+	sh->capacity = capacity;
 }
 
 void		ft_vector_add(t_minishell *sh, void *s)
