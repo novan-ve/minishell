@@ -6,7 +6,7 @@
 /*   By: novan-ve <novan-ve@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/10 12:19:14 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/11 12:33:38 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/11 13:04:58 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			ft_vector_total(t_minishell *sh)
 static void	ft_vector_resize(t_minishell *sh, int capacity)
 {
 	void	**items;
-    printf("vector_resize: %d to %d\n", sh->capacity, capacity);
+
 	items = ft_realloc(sh->env, sh->capacity * sizeof(void *), capacity * sizeof(void *));
 	if (!items)
 	{
@@ -63,7 +63,7 @@ void		ft_vector_delete(t_minishell *sh, int index)
 {
 	int		i;
 
-	if (index > 0 && index <= sh->total)
+	if (index >= 0 && index <= sh->total)
 	{
 		sh->env[index] = NULL;
 		i = index;

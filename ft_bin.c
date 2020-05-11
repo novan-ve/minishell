@@ -6,7 +6,7 @@
 /*   By: novan-ve <novan-ve@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:44:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/09 13:31:04 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/11 13:13:53 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_pwd(t_minishell *sh)
 	sh->status = 1;
 }
 
-int		ft_echo(t_minishell *sh)
+void	ft_echo(t_minishell *sh)
 {
 	int		i;
 
@@ -54,4 +54,61 @@ int		ft_echo(t_minishell *sh)
 	}
 	write(1, "\n", 1);
 	sh->status = 1;
+}
+
+void	ft_env(t_minishell *sh)
+{
+	int		i;
+
+	if (sh->env)
+	{
+		i = 0;
+		while (i < sh->total)
+		{
+			ft_putendl(sh->env[i]);
+			i++;
+		}
+	}
+}
+
+void	ft_export(t_minishell *sh)
+{
+	int		i;
+
+	i = 1;
+	if (!sh->env)
+		ft_vector_init(sh);
+	while (sh->args[i])
+	{
+		ft_vector_add(sh, sh->args[i]);
+		i++;
+	}
+}
+
+void	ft_unset(t_minishell *sh)
+{
+	int		i;
+	int		j;
+	int		k;
+
+	i = 1;
+	while (sh->args[i])
+	{
+		j = 0;
+		while (j < sh->total)
+		{
+			k = 0;
+			while (sh->args[i][k] == ((char*)ft_vector_get(sh, j))[k])
+			{
+				if (sh->args[i][k + 1] == '\0' && ((char*)ft_vector_get(sh, j))[k + 1] == '=')
+				{
+					ft_vector_delete(sh, j);
+					break;
+				}
+				k++;
+			}
+			j++;
+		}
+		i++;
+	}
 }

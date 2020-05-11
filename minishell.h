@@ -6,7 +6,7 @@
 /*   By: novan-ve <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/10 14:47:07 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/11 12:49:26 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # define EXIT_SUCCES 0
 # define EXIT_FAILURE 1
-
-# define VECTOR_INIT_CAPACITY 4
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -47,10 +45,12 @@ void			ft_launch(t_minishell *sh);
 void			ft_cd(t_minishell *sh);
 void			ft_exit(t_minishell *sh);
 void			ft_pwd(t_minishell *sh);
-int				ft_echo(t_minishell *sh);
+void			ft_echo(t_minishell *sh);
+void			ft_env(t_minishell *sh);
+void			ft_export(t_minishell *sh);
+void			ft_unset(t_minishell *sh);
 
 void			*ft_realloc(void *ptr, size_t prev, size_t new);
-void			*ft_memcpy(void *dst, const void *src, size_t n);
 int				ft_isspace(char c);
 size_t			ft_strlen(const char *s);
 void			ft_putstr(char *s);
