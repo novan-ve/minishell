@@ -6,7 +6,7 @@
 /*   By: novan-ve <novan-ve@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:44:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/11 13:13:53 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/11 13:23:24 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,11 @@ void	ft_unset(t_minishell *sh)
 			while (sh->args[i][k] == ((char*)ft_vector_get(sh, j))[k])
 			{
 				if (sh->args[i][k + 1] == '\0' && ((char*)ft_vector_get(sh, j))[k + 1] == '=')
+				{
+					ft_vector_delete(sh, j);
+					break;
+				}
+				if (sh->args[i][k + 1] == '\0' && ((char*)ft_vector_get(sh, j))[k + 1] == '\0')
 				{
 					ft_vector_delete(sh, j);
 					break;
