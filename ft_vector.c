@@ -6,7 +6,7 @@
 /*   By: novan-ve <novan-ve@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/10 12:19:14 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/10 14:48:22 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/11 12:33:38 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		ft_vector_init(t_minishell *sh)
 {
-	sh->capacity = VECTOR_INIT_CAPACITY;
+	sh->capacity = 1;
 	sh->total = 0;
 	sh->env = malloc(sizeof(void *) * sh->capacity);
 }
@@ -27,8 +27,7 @@ int			ft_vector_total(t_minishell *sh)
 static void	ft_vector_resize(t_minishell *sh, int capacity)
 {
 	void	**items;
-
-	printf("vector_resize: %d to %d\n", sh->capacity, capacity);
+    printf("vector_resize: %d to %d\n", sh->capacity, capacity);
 	items = ft_realloc(sh->env, sh->capacity * sizeof(void *), capacity * sizeof(void *));
 	if (!items)
 	{
@@ -42,7 +41,7 @@ static void	ft_vector_resize(t_minishell *sh, int capacity)
 void		ft_vector_add(t_minishell *sh, void *s)
 {
 	if (sh->capacity == sh->total)
-		ft_vector_resize(sh, sh->capacity * 2);
+		ft_vector_resize(sh, sh->capacity + 1);
 	sh->env[sh->total] = s;
 	sh->total++;
 }
@@ -67,7 +66,7 @@ void		ft_vector_delete(t_minishell *sh, int index)
 	if (index > 0 && index <= sh->total)
 	{
 		sh->env[index] = NULL;
-		i = 0;
+		i = index;
 		while (i < sh->total - 1)
 		{
 			sh->env[i] = sh->env[i + 1];
@@ -75,8 +74,8 @@ void		ft_vector_delete(t_minishell *sh, int index)
 			i++;
 		}
 		sh->total--;
-		if (sh->total > 0 && sh->total == sh->capacity / 4)
-			ft_vector_resize(sh, sh->capacity / 2);
+		if (sh->total > 0 && sh->total < sh->capacity)
+			ft_vector_resize(sh, sh->total);
 	}
 }
 
