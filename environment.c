@@ -6,23 +6,28 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 00:53:59 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/13 13:34:04 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 13:58:52 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char        *get_home(t_minishell *sh)
+char        *get_env(t_minishell *sh, char *env)
 {
     t_env   *list;
+    int     length;
+    int     start;
 
 	list = sh->first_element;
+    start = ft_strlen(env) + 1;
+    length = ft_strlen(list->data) - start;
 	while (list)
     {
-        if (!ft_envcmp("HOME=", list->data))
-            return (ft_substr(list->data, 5, (ft_strlen(list->data) - 4)));
+        if (!ft_envcmp(env, list->data))
+            return (ft_substr(list->data, start, length));
         list = list->next;
-    }  
+    }
+    return (0);
 }
 
 void        env_show(t_minishell *sh)

@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 04:20:53 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 13:54:23 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void			builtin_exit(t_minishell *sh);
 void			builtin_pwd(t_minishell *sh);
 void			builtin_echo(t_minishell *sh);
 
-char			*get_home(t_minishell *sh);
+char			*get_env(t_minishell *sh, char *env);
 void			env_show(t_minishell *sh);
 void			env_export(t_minishell *sh);
 void			env_unset(t_minishell *sh);
