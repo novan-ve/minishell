@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:43:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 04:17:31 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 15:52:20 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		main(int ac, char **av, char **env)
 	setup_list(&sh, env);
 	while (1)
 	{
-		ft_putstr("minishell> ");
+		print_prompt(&sh);
 		read_input(&sh);
 		split_input(&sh);
 		//show_args(&sh);    					//UNCOMMENT FOR DEBUGGING
@@ -27,4 +27,5 @@ int		main(int ac, char **av, char **env)
 		clean(&sh);
 	}
 	return (0);
+	av[0][0] = ac;
 }

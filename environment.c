@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 00:53:59 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/13 13:58:52 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 16:01:25 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char        *get_env(t_minishell *sh, char *env)
     length = ft_strlen(list->data) - start;
 	while (list)
     {
-        if (!ft_envcmp(env, list->data))
+        if (!ft_envcmp(list->data, env))
             return (ft_substr(list->data, start, length));
         list = list->next;
     }

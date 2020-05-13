@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 00:53:55 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/13 13:45:13 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 15:29:55 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ t_env	*create_element(char *data)
 {
 	t_env	*new;
 
-	new = malloc(sizeof(t_env));
+    new = malloc(sizeof(t_env));
     if (!new)
+    {
         exit(EXIT_FAILURE);
+    }
 	new->data = data;
 	new->next = 0;
 	return (new);

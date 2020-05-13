@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:44:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 13:48:48 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 15:20:57 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ void	builtin_cd(t_minishell *sh)
 		ft_error(strerror(errno));
 }
 
-void	builtin_exit(t_minishell *sh)
+void	builtin_exit(void)
 {
 	exit(EXIT_SUCCESS);
 }
 
-void	builtin_pwd(t_minishell *sh)
+void	builtin_pwd(void)
 {
 	char	path[1024];
 

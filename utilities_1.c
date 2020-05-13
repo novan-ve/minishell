@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:26:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 02:03:16 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 15:58:15 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int		ft_strlen(char *s)
 
 void	ft_putstr(char *s)
 {
-	write(1, s, ft_strlen(s));
+	if (s)
+		write(1, s, ft_strlen(s));
 }
 
 void	ft_putendl(char *s)

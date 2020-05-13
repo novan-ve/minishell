@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/12 13:15:15 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/13 13:29:21 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 16:11:03 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char    *ft_strdup(char *str)
 {
     char    *dst;
-    char    i;
+    int	    i;
 
     i = 0;
     dst = (char*)malloc(sizeof(char) * ft_strlen(str) + 1);
@@ -30,11 +30,11 @@ char    *ft_strdup(char *str)
     return (dst);
 }
 
-char	*ft_substr(char const *s, int start, int len)
+char	*ft_substr(char *s, int start, int len)
 {
 	char	*str;
 	void	*ptr;
-	size_t	i;
+	int		i;
 
 	i = 0;
 	ptr = (char*)malloc(sizeof(char) * (len + 1));
@@ -71,3 +71,23 @@ int		ft_envcmp(char *s1, char *s2)
 	}
 	return (s1[i - 1] - s2[i - 1]);
 }
+
+char 	*ft_reallocate(char *line, int prev, int new)
+{
+	char	*dest;
+	int		i;
+
+	dest = (char*)malloc(sizeof(char) * new);
+	if (!dest)
+		exit(EXIT_FAILURE);
+	i = 0;
+	while (prev > 0)
+	{
+		dest[i] = line[i];
+		i++;
+		prev--;	
+	}
+	free(line);
+	return (dest);
+}
+

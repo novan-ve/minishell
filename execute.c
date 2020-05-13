@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:50:21 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 04:21:34 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 15:39:57 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	execute(t_minishell *sh)
 		if (!ft_strcmp(sh->args[sh->arg_index], "cd"))
 			builtin_cd(sh);
 		else if (!ft_strcmp(sh->args[sh->arg_index], "exit"))
-			builtin_exit(sh);
+			builtin_exit();
 		else if (!ft_strcmp(sh->args[sh->arg_index], "pwd"))
-			builtin_pwd(sh);
+			builtin_pwd();
 		else if (!ft_strcmp(sh->args[sh->arg_index], "echo"))
 			builtin_echo(sh);
 		else if (!ft_strcmp(sh->args[sh->arg_index], "env"))
