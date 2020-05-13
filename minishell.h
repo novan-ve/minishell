@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 13:54:23 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 16:28:07 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include <errno.h>
 # include <string.h>
+# include <fcntl.h>
 # include <sys/wait.h>
 
 typedef struct		s_env
@@ -38,10 +39,12 @@ typedef	struct		s_minishell
 	t_env			*first_element;
 }					t_minishell;
 
+void			print_prompt(t_minishell *sh);
 void			read_input(t_minishell *sh);
 void			split_input(t_minishell *sh);
 void			execute(t_minishell *sh);
-void			launch(t_minishell *sh);
+
+//void			launch(t_minishell *sh);
 
 void			setup_list(t_minishell *sh, char **env);
 void			list_push_back(t_env **first_element, char *data);
@@ -49,8 +52,8 @@ void			list_remove_if(t_env **first_element, char *ref_data);
 t_env			*create_element(char *data);
 
 void			builtin_cd(t_minishell *sh);
-void			builtin_exit(t_minishell *sh);
-void			builtin_pwd(t_minishell *sh);
+void			builtin_exit(void);
+void			builtin_pwd(void);
 void			builtin_echo(t_minishell *sh);
 
 char			*get_env(t_minishell *sh, char *env);
@@ -66,10 +69,11 @@ int				ft_strlen(char *s);
 void			ft_putstr(char *s);
 void			ft_putendl(char *s);
 int				ft_strcmp(char *s1, char *s2);
-char			*ft_substr(char const *s, int start, int len);
-char			*ft_strdup(char *s1);
+char			*ft_substr(char *s, int start, int len);
+char			*ft_strdup(char *str);
 void			ft_error(char *s);
 int				ft_envcmp(char *s1, char *s2);
+char 			*ft_reallocate(char *line, int prev, int new);
 
 
 /// TROUBLESHOOTING FUNCTIONS //
