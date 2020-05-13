@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:50:21 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 04:12:28 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 04:21:34 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	execute(t_minishell *sh)
 		else if (!ft_strcmp(sh->args[sh->arg_index], "export"))
 			env_export(sh);
 		else if (!ft_strcmp(sh->args[sh->arg_index], "unset"))
-			list_remove_if(&sh->first_element, sh->args[sh->arg_index + 1]);
-		else
-			ft_launch(sh);
+			env_unset(sh);
+		//else
+		//	launch(sh);
 		sh->arg_index++;
 	}
 }

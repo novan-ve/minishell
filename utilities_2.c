@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/12 13:15:15 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/13 03:53:47 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 04:16:55 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ char	*ft_substr(char const *s, int start, int len)
 
 void    ft_error(char *s)
 {
-    write(1, "jemoeder\n", 9);
     write(2, "Minishell: ", 11);
     write(2, s, ft_strlen(s));
     write(2 , "\n", 1);

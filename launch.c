@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 14:22:47 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 04:12:57 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 04:19:42 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "minishell.h"
 
-void	ft_launch(t_minishell *sh)
+void	launch(t_minishell *sh)
 {
 	pid_t	pid;
 	pid_t	wpid;
