@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 00:53:55 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/13 13:34:55 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 13:45:13 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,13 @@ void	list_push_back(t_env **first_element, char *data)
 	list->next = create_element(data);
 }
 
-void    setup_list(t_minishell *sh, char **env)
-{
-    int     i;
-    t_env   *begin;
-
-    begin = create_element(env[0]);
-    i = 1;
-    while (env[i] != 0)
-    {
-        list_push_back(&begin, env[i]);
-        i++;
-    }
-    sh->first_element = begin;
-}
-
 void	list_remove_if(t_env **first_element, char *ref_data)
 {
 	t_env   *list;
     t_env   *next_element;
 
 	list = *first_element;
-
-	while (list)
+    while (list)
     {
         if (list->next)
         {
@@ -73,4 +57,19 @@ void	list_remove_if(t_env **first_element, char *ref_data)
         }
         list = list->next;
     }
+}
+
+void    setup_list(t_minishell *sh, char **env)
+{
+    int     i;
+    t_env   *begin;
+
+    begin = create_element(env[0]);
+    i = 1;
+    while (env[i] != 0)
+    {
+        list_push_back(&begin, env[i]);
+        i++;
+    }
+    sh->first_element = begin;
 }

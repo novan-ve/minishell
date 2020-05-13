@@ -6,13 +6,11 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:44:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 13:37:21 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 13:38:24 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 void	builtin_echo(t_minishell *sh)
 {
