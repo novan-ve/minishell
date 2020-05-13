@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:44:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 02:26:05 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 13:37:21 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	builtin_echo(t_minishell *sh)
 
 void	builtin_cd(t_minishell *sh)
 {
-	char 	*path;
-
 	if (sh->args[sh->arg_index + 1] == 0)
 	{
 		if (chdir(get_home(sh)))
+		{
 			ft_error(strerror(errno));
+		}
 	}
 	else if (sh->args[sh->arg_index + 2] != 0)
 	{
