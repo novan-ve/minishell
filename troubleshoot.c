@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.c                                        :+:    :+:            */
+/*   troubleshoot.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/09 13:43:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 03:00:05 by abobas        ########   odam.nl         */
+/*   Created: 2020/05/12 13:41:10 by abobas        #+#    #+#                 */
+/*   Updated: 2020/05/13 02:17:59 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		main(int ac, char **av, char **env)
+void        show_args(t_minishell *sh)
 {
-	t_minishell		sh;
+    int i = 0;
 
-	setup_list(&sh, env);
-	//show_env(&sh); 							//UNCOMMENT FOR DEBUGGING
-	while (1)
-	{
-		ft_putstr("minishell> ");
-		read_input(&sh);
-		split_input(&sh);
-		//show_args(&sh);    				//UNCOMMENT FOR DEBUGGING
-		execute(&sh);
-		clean(&sh);
-	}
-	return (0);
+    printf("arg_count = %d\n", sh->arg_count);
+    while (i < sh->arg_count)
+    {
+        printf("%s\n", sh->args[i]);
+        i++;
+    }
+}
+
+void        show_env(t_minishell *sh)
+{
+    t_env *list;
+
+	list = sh->first_element;
+	while (list)
+    {
+        printf("%s\n", list->data);
+		list = list->next;
+    }
 }

@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.c                                        :+:    :+:            */
+/*   clean.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/09 13:43:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 03:00:05 by abobas        ########   odam.nl         */
+/*   Created: 2020/05/12 14:10:32 by abobas        #+#    #+#                 */
+/*   Updated: 2020/05/12 19:37:07 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		main(int ac, char **av, char **env)
+void    free_args(t_minishell *sh)
 {
-	t_minishell		sh;
+    int     i;
 
-	setup_list(&sh, env);
-	//show_env(&sh); 							//UNCOMMENT FOR DEBUGGING
-	while (1)
-	{
-		ft_putstr("minishell> ");
-		read_input(&sh);
-		split_input(&sh);
-		//show_args(&sh);    				//UNCOMMENT FOR DEBUGGING
-		execute(&sh);
-		clean(&sh);
-	}
-	return (0);
+    i = 0;
+    while (i < sh->arg_count)
+    {
+        free(sh->args[i]);
+        i++;
+    }
+}
+
+void    clean(t_minishell *sh)
+{
+    free(sh->line);
+    free_args(sh);
 }
