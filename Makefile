@@ -6,7 +6,7 @@
 #    By: abobas <abobas@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/13 15:12:27 by abobas        #+#    #+#                  #
-#    Updated: 2020/05/13 17:05:16 by abobas        ########   odam.nl          #
+#    Updated: 2020/05/13 18:23:52 by abobas        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,8 @@ all: $(NAME)
 $(NAME): $(OBJ_FILES) $(HEADER)
 	gcc $(FLAGS) $(OBJ_FILES) -o $(NAME)
 
-%.o: %.s
-	gcc $(FLAGS) -o $@ $<
+%.o: %.c
+	gcc $(FLAGS) -c -o $@ $<
 
 run: $(NAME)
 	./minishell

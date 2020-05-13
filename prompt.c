@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 15:49:50 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/13 17:08:02 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 18:24:11 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char    *read_host(int fd)
 	int		i;
 	char	ch;
     char    *host;
-    int     check;
 
 	bufsize = 128;
 	i = 0;
