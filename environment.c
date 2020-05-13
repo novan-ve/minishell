@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 00:53:59 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/13 04:39:03 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 13:34:04 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void        env_export(t_minishell *sh)
 
     i = 0;
     insert = ft_strdup(sh->args[sh->arg_index + 1]);
+    list_remove_if(&sh->first_element, insert);
     while (insert[i] != '\0')
     {
         if (insert[i] == '=')

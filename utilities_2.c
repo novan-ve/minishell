@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/12 13:15:15 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/13 04:16:55 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 13:29:21 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,8 @@ int		ft_envcmp(char *s1, char *s2)
 	while (s1[i] != '\0' && s1[i] != '=')
 	{
 		if (s1[i] != s2[i])
-			break ;
+			return (1);
 		i++;
 	}
-    i--;
-	return (s1[i] - s2[i]);
+	return (s1[i - 1] - s2[i - 1]);
 }

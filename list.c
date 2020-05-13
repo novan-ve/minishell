@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 00:53:55 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/13 04:37:00 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 13:34:55 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ void	list_remove_if(t_env **first_element, char *ref_data)
     t_env   *next_element;
 
 	list = *first_element;
+
 	while (list)
-    {   
+    {
         if (list->next)
         {
             next_element = list->next;
@@ -66,10 +67,10 @@ void	list_remove_if(t_env **first_element, char *ref_data)
                     list->next = next_element->next;
                 else
                     list->next = 0;
-                next_element->data = 0;
                 free(next_element);
+                return ;
             }
-            list = list->next;
         }
-    }  
+        list = list->next;
+    }
 }
