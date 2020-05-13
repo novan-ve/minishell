@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 15:49:50 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/13 16:26:12 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 17:08:02 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,26 @@ char    *read_host(int fd)
 	}
 }
 
+char       *get_workdir(t_minishell *sh)
+{
+    char    path[1024];
+    char    *home;
+    char    *work_dir;
+    char    *temp;
+
+    getcwd(path, 1024);
+    home = get_env(sh, "HOME");
+    if (!ft_envcmp(home, path))
+    {
+        temp = ft_substr(path, ft_strlen(home), ft_strlen(path) - ft_strlen(home));
+        work_dir = ft_strjoin("~", temp);
+        free(temp);
+        return (work_dir);
+    }
+    work_dir = ft_strdup(path);
+    return (work_dir);
+}
+
 char    *get_host(void)
 {
     int     fd;
@@ -59,15 +79,16 @@ char    *get_host(void)
 void    print_prompt(t_minishell *sh)
 {
     char    *host;
-    char    work_dir[128];
+    char    *work_dir;
 
     host = get_host();
-    getcwd(work_dir, 1024);
+    work_dir = get_workdir(sh);
     ft_putstr(get_env(sh, "USER"));
     ft_putstr("@");
     ft_putstr(host);
-    free(host);
     ft_putstr(":");
     ft_putstr(work_dir);
     ft_putstr("$ ");
+    free(host);
+    free(work_dir);
 }

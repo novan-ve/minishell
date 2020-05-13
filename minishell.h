@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 16:28:07 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/13 17:05:01 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char			*ft_strdup(char *str);
 void			ft_error(char *s);
 int				ft_envcmp(char *s1, char *s2);
 char 			*ft_reallocate(char *line, int prev, int new);
+char			*ft_strjoin(char *s1, char *s2);
 
 
 /// TROUBLESHOOTING FUNCTIONS //

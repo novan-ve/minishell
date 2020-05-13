@@ -6,7 +6,7 @@
 #    By: abobas <abobas@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/13 15:12:27 by abobas        #+#    #+#                  #
-#    Updated: 2020/05/13 15:54:03 by abobas        ########   odam.nl          #
+#    Updated: 2020/05/13 17:05:16 by abobas        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ MAN_OBJ = 	minishell.o \
 			clean.o \
 			utilities_1.o \
 			utilities_2.o \
+			utilities_3.o \
 			troubleshoot.o 
 			#launch.c
 
