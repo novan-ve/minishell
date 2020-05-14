@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:44:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/14 17:32:41 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/14 18:14:08 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,16 @@ void	builtin_echo(t_minishell *sh)
 			newline = 0;
 			sh->arg_index++;
 		}
-		while (sh->arg_index < sh->arg_count && sh->args[sh->arg_index][0] != ';')
+		while (sh->arg_index < sh->arg_count)
 		{
-			ft_putstr(sh->args[sh->arg_index]);
-			write(1, " ", 1);
+			if (sh->args[sh->arg_index] != 0)
+			{
+				if (sh->args[sh->arg_index][0] == ';')
+					break ;
+				if (sh->args[sh->arg_index])
+				ft_putstr(sh->args[sh->arg_index]);
+				write(1, " ", 1);
+			}
 			sh->arg_index++;
 		}
 	}

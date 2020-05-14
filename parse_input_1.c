@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/14 16:16:35 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/14 17:09:30 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/14 17:40:09 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ void    parse_literals(t_minishell *sh)
             sh->args[i] = ft_trim(sh->args[i]);
         }
         else if (check_semi(sh->args[i]))
+        {
+            sh->bool[i] = 2;
             sh->args[i] = ft_trim(sh->args[i]);
+        }
         i++;
     }
 }
