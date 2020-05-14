@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/14 16:59:25 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/14 19:53:57 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/14 20:01:48 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void        substitute_env(t_minishell *sh, int i, int start)
     result = get_env(sh, env);
     free(env);
     temp = ft_substr(sh->args[i], 0, start -1);
+    free(sh->args[i]);
     if (sh->bool[i] == 2 && !result)
         result = ft_strdup("");
-    free(sh->args[i]);
-    if (!sh->bool[i] && !ft_strlen(temp) && !result)
+    if (sh->bool[i] == 0 && !ft_strlen(temp) && !result)
         sh->args[i] = 0;
     else
         sh->args[i] = ft_strjoin(temp, result);
