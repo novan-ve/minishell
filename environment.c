@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 00:53:59 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/13 16:01:25 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/14 17:15:06 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char        *get_env(t_minishell *sh, char *env)
             return (ft_substr(list->data, start, length));
         list = list->next;
     }
-    return (0);
+    return (ft_strdup(""));
 }
 
 void        env_show(t_minishell *sh)

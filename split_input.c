@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 14:28:55 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/14 15:59:19 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/14 16:43:09 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,26 +71,9 @@ void	split(t_minishell *sh)
 	sh->args[j] = 0;
 }
 
-void	init_bool(t_minishell *sh)
-{
-	int		i;
-
-	sh->bool = (int*)malloc(sizeof (int) * sh->arg_count);
-	if (sh->bool == 0)
-		exit(EXIT_FAILURE);
-	i = 0;
-	while (i < sh->arg_count)
-	{
-		sh->bool[i] = 0;
-		i++;
-	}
-	// for(i = 0; i < sh->arg_count; ++i){printf("bool[%d] = %d\n", i, sh->bool[i]);}	//UNCOMMENT FOR DEBUGGING
-}
-
 void	split_input(t_minishell *sh)
 {
 	count(sh);
-	init_bool(sh);
 	sh->args = (char**)malloc(sizeof(char *) * sh->arg_count + 1);
 	if (sh->args == 0)
 		exit(EXIT_FAILURE);

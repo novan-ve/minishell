@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/14 14:35:35 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/14 17:00:03 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef	struct		s_minishell
 void			print_prompt(t_minishell *sh);
 void			read_input(t_minishell *sh);
 void			split_input(t_minishell *sh);
+void			parse_input(t_minishell *sh);
+void			parse_env(t_minishell *sh);
 void			execute(t_minishell *sh);
 
 //void			launch(t_minishell *sh);
@@ -76,6 +78,7 @@ void			ft_error(char *s);
 int				ft_envcmp(char *s1, char *s2);
 char 			*ft_reallocate(char *line, int prev, int new);
 char			*ft_strjoin(char *s1, char *s2);
+char			*ft_trim(char *src);
 
 
 /// TROUBLESHOOTING FUNCTIONS //
