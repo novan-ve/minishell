@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/12 13:15:15 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/13 16:11:03 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/14 21:50:21 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 char    *ft_strdup(char *str)
 {
-    char    *dst;
-    int	    i;
+	char    *dst;
+	int	    i;
 
-    i = 0;
-    dst = (char*)malloc(sizeof(char) * ft_strlen(str) + 1);
-    if (!dst)
-        exit(EXIT_FAILURE);
-    while (str[i] != '\0')
-    {
-        dst[i] = str[i];
-        i++;
-    }
-    dst[i] = '\0';
-    return (dst);
+	i = 0;
+	dst = (char*)malloc(sizeof(char) * ft_strlen(str) + 1);
+	if (!dst)
+		exit(EXIT_FAILURE);
+	while (str[i] != '\0')
+	{
+		dst[i] = str[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }
 
 char	*ft_substr(char *s, int start, int len)
@@ -53,9 +53,9 @@ char	*ft_substr(char *s, int start, int len)
 
 void    ft_error(char *s)
 {
-    write(2, "Minishell: ", 11);
-    write(2, s, ft_strlen(s));
-    write(2 , "\n", 1);
+	write(2, "Minishell: ", 11);
+	write(2, s, ft_strlen(s));
+	write(2 , "\n", 1);
 }
 
 int		ft_envcmp(char *s1, char *s2)
