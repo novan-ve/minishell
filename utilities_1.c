@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:26:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/14 17:51:39 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/14 19:42:12 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int		ft_strlen(char *s)
 	int i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i] != '\0')
 		i++;
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 17:00:39 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/14 16:56:53 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/14 19:51:07 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,24 @@ char        *ft_strjoin(char *s1, char *s2)
     new = (char*)malloc(sizeof(char) * length);
     if (!new)
         exit(EXIT_FAILURE);
-    while (s1[i] != '\0')
+    if (s1)
     {
-        new[y] = s1[i];
-        y++;
-        i++;
+        while (s1[i] != '\0')
+        {
+            new[y] = s1[i];
+            y++;
+            i++;
+        }
+        i = 0;
     }
-    i = 0;
-    while (s2[i] != '\0')
+    if (s2)
     {
-        new[y] = s2[i];
-        y++;
-        i++;
+        while (s2[i] != '\0')
+        {
+            new[y] = s2[i];
+            y++;
+            i++;
+        }
     }
     new[y] = '\0';
     return (new);

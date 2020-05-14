@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/14 16:59:25 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/14 18:04:43 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/14 19:53:57 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,52 @@
 
 int         check_env(char *arg)
 {
-    if (arg[0] == 36)
-        return (1);
+    int     i;
+
+    i = 0;
+    while (arg[i] != '\0')
+    {
+        if (arg[i] == 36)
+            return (i + 1);
+        i++;
+    }
     return (0);
 }
 
-void        substitute_env(t_minishell *sh, int i)
+void        substitute_env(t_minishell *sh, int i, int start)
 {
     char    *env;
     char    *result;
+    char    *temp;
 
     if (sh->bool[i] == 1)
         return ;
-    env = ft_substr(sh->args[i], 1, ft_strlen(sh->args[i]) - 1);
+    env = ft_substr(sh->args[i], start, ft_strlen(sh->args[i]) - start);
     result = get_env(sh, env);
-    free(sh->args[i]);
     free(env);
+    temp = ft_substr(sh->args[i], 0, start -1);
     if (sh->bool[i] == 2 && !result)
-        sh->args[i] = ft_strdup("");
+        result = ft_strdup("");
+    free(sh->args[i]);
+    if (!sh->bool[i] && !ft_strlen(temp) && !result)
+        sh->args[i] = 0;
     else
-        sh->args[i] = result;
+        sh->args[i] = ft_strjoin(temp, result);
+    if (result)
+        free(result);
+    free(temp);
 }
 
 void        parse_env(t_minishell *sh)
 {
     int     i;
+    int     start;
 
     i = 0;
     while (i < sh->arg_count)
     {
-        if (check_env(sh->args[i]))
-            substitute_env(sh, i);
+        if ((start = check_env(sh->args[i])) > 0)
+            substitute_env(sh, i, start);
         i++;
     }
 }
