@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:44:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/14 16:05:21 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/14 17:32:41 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,19 @@ void	builtin_echo(t_minishell *sh)
 
 	newline = 1;
 	sh->arg_index++;
-	if (!ft_strcmp(sh->args[sh->arg_index], "-n"))
+	if (sh->arg_index < sh->arg_count)
 	{
-		newline = 0;
-		sh->arg_index++;
-	}
-	while (sh->arg_index < sh->arg_count && sh->args[sh->arg_index][0] != ';')
-	{
-		ft_putstr(sh->args[sh->arg_index]);
-		write(1, " ", 1);
-		sh->arg_index++;
+		if (!ft_strcmp(sh->args[sh->arg_index], "-n"))
+		{
+			newline = 0;
+			sh->arg_index++;
+		}
+		while (sh->arg_index < sh->arg_count && sh->args[sh->arg_index][0] != ';')
+		{
+			ft_putstr(sh->args[sh->arg_index]);
+			write(1, " ", 1);
+			sh->arg_index++;
+		}
 	}
 	if (newline)
 		write(1, "\n", 1);
@@ -38,9 +41,7 @@ void	builtin_cd(t_minishell *sh)
 	if (sh->args[sh->arg_index + 1] == 0)
 	{
 		if (chdir(get_env(sh, "HOME")))
-		{
 			ft_error(strerror(errno));
-		}
 	}
 	else if (sh->args[sh->arg_index + 2] != 0)
 	{
