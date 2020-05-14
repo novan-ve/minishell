@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:44:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 15:20:57 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/14 16:05:21 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,19 @@
 void	builtin_echo(t_minishell *sh)
 {
 	int		newline;
-	int		i;
 
 	newline = 1;
-	i = sh->arg_index + 1;
-	if (!ft_strcmp(sh->args[sh->arg_index + 1], "-n"))
+	sh->arg_index++;
+	if (!ft_strcmp(sh->args[sh->arg_index], "-n"))
 	{
 		newline = 0;
-		i++;
+		sh->arg_index++;
 	}
-	while (i < sh->arg_count)
+	while (sh->arg_index < sh->arg_count && sh->args[sh->arg_index][0] != ';')
 	{
-		ft_putstr(sh->args[i]);
+		ft_putstr(sh->args[sh->arg_index]);
 		write(1, " ", 1);
-		i++;
+		sh->arg_index++;
 	}
 	if (newline)
 		write(1, "\n", 1);
@@ -49,7 +48,10 @@ void	builtin_cd(t_minishell *sh)
 		return ;
 	}
 	else if (chdir(sh->args[sh->arg_index + 1]))
+	{
 		ft_error(strerror(errno));
+		sh->arg_index++;
+	}
 }
 
 void	builtin_exit(void)

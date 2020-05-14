@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 17:05:01 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/14 14:35:35 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef	struct		s_minishell
 {
 	char			*line;
 	char			**args;
+	int				*bool;
 	int				arg_count;
 	int				arg_index;
 	t_env			*first_element;
