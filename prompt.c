@@ -6,24 +6,20 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 15:49:50 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/15 14:47:57 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/15 17:46:00 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*read_host(int fd)
+char	*read_host(int fd, char *host)
 {
 	int		bufsize;
 	int		i;
 	char	ch;
-	char	*host;
 
 	bufsize = 128;
 	i = 0;
-	host = (char*)malloc(sizeof(char) * bufsize);
-	if (!host)
-		exit(EXIT_FAILURE);
 	while (1)
 	{
 		if (read(fd, &ch, 1) < 0)
@@ -44,6 +40,20 @@ char	*read_host(int fd)
 	}
 }
 
+char	*get_host(void)
+{
+	int		fd;
+	char	*host;
+
+	fd = open("/proc/sys/kernel/hostname", O_RDONLY);
+	host = (char*)malloc(sizeof(char) * 128);
+	if (!host)
+		exit(EXIT_FAILURE);
+	host = read_host(fd, host);
+	close(fd);
+	return (host);
+}
+
 char	*get_workdir(t_minishell *sh)
 {
 	char	path[1024];
@@ -62,17 +72,6 @@ char	*get_workdir(t_minishell *sh)
 	}
 	work_dir = ft_strdup(path);
 	return (work_dir);
-}
-
-char	*get_host(void)
-{
-	int		fd;
-	char	*host;
-
-	fd = open("/proc/sys/kernel/hostname", O_RDONLY);
-	host = read_host(fd);
-	close(fd);
-	return (host);
 }
 
 void	print_prompt(t_minishell *sh)
