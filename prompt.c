@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 15:49:50 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/14 21:39:44 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/15 14:47:57 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,12 @@ void	print_prompt(t_minishell *sh)
 {
 	char	*host;
 	char	*work_dir;
+	char	*user;
 
 	host = get_host();
 	work_dir = get_workdir(sh);
-	ft_putstr(get_env(sh, "USER"));
+	user = get_env(sh, "USER");
+	ft_putstr(user);
 	ft_putstr("@");
 	ft_putstr(host);
 	ft_putstr(":");
@@ -90,4 +92,5 @@ void	print_prompt(t_minishell *sh)
 	ft_putstr("$ ");
 	free(host);
 	free(work_dir);
+	free(user);
 }

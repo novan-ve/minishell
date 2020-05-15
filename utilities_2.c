@@ -6,13 +6,13 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/12 13:15:15 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/14 21:50:21 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/15 14:23:16 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char    *ft_strdup(char *str)
+char	*ft_strdup(char *str)
 {
 	char    *dst;
 	int	    i;
@@ -51,7 +51,7 @@ char	*ft_substr(char *s, int start, int len)
 	return (str);
 }
 
-void    ft_error(char *s)
+void	ft_error(char *s)
 {
 	write(2, "Minishell: ", 11);
 	write(2, s, ft_strlen(s));
@@ -72,7 +72,7 @@ int		ft_envcmp(char *s1, char *s2)
 	return (s1[i - 1] - s2[i - 1]);
 }
 
-char 	*ft_reallocate(char *line, int prev, int new)
+char	*ft_reallocate(char *line, int prev, int new)
 {
 	char	*dest;
 	int		i;
