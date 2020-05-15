@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:43:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/15 16:28:32 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/15 17:27:48 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int		main(int ac, char **av, char **env)
 	{
 		print_prompt(&sh);
 		read_input(&sh);
-		if (!quote_check(&sh))
-			continue ;
 		split_input(&sh);
+		if (!input_check(&sh))
+			continue ;
 		parse_input(&sh);
-		show_args(&sh);    					//UNCOMMENT FOR DEBUGGING
+		show_args(&sh);    						//UNCOMMENT FOR DEBUGGING
 		execute(&sh);
 		clean(&sh);
 	}

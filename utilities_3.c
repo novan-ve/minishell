@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 17:00:39 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/15 16:26:32 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/15 17:16:33 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,33 +70,4 @@ char	*ft_trim(char *src)
 	dst[i] = '\0';
 	free(src);
 	return (dst);
-}
-
-int		quote_check(t_minishell *sh)
-{
-	int		i;
-	int		quote;
-	int		count;
-
-	i = 0;
-	quote = 0;
-	count = 0;
-	while (sh->line[i])
-	{
-		if (!quote && (sh->line[i] == 34 || sh->line[i] == 39))
-		{
-			quote = sh->line[i];
-			count = 1;
-		}
-		else if (sh->line[i] == quote)
-			count++;
-		i++;
-	}
-	if (count % 2)
-	{
-		free(sh->line);
-		ft_error("Missing quotes");
-		return (0);
-	}
-	return (1);
 }

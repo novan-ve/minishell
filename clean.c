@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/12 14:10:32 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/15 15:14:13 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/15 17:32:04 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void    free_args(t_minishell *sh)
 void    clean(t_minishell *sh)
 {
 	free(sh->line);
-	free(sh->bool);
 	free_args(sh);
+	free(sh->bool);
 }
