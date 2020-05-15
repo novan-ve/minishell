@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 14:28:55 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/15 16:41:34 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/15 16:44:22 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	count(t_minishell *sh)
 			{
 				if (ft_isspace(sh->line[i]) && !(check % 2) && !(check2 % 2))
 					break;
-				if (sh->line[i] == ';' && check == 0)
+				if (sh->line[i] == ';' && check == 0 && check2 == 0)
 					break ;
 				if (sh->line[i] == 34)
 					check++;
@@ -85,7 +85,7 @@ void	split(t_minishell *sh)
 			{
 				if (ft_isspace(sh->line[i]) && !(check % 2) && !(check2 % 2))
 					break;
-				if (sh->line[i] == ';' && check == 0)
+				if (sh->line[i] == ';' && check == 0 && check2 == 0)
 					break ;
 				if (sh->line[i] == 34)
 					check++;
