@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 17:00:39 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/15 14:24:00 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/15 16:26:32 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,22 +75,27 @@ char	*ft_trim(char *src)
 int		quote_check(t_minishell *sh)
 {
 	int		i;
-	int		semi;
-	int		literal;
+	int		quote;
+	int		count;
 
 	i = 0;
-	semi = 0;
-	literal = 0;
+	quote = 0;
+	count = 0;
 	while (sh->line[i])
 	{
-		semi = (sh->line[i] == 34) ? semi + 1 : semi;
-		literal = (sh->line[i] == 39) ? literal + 1 : literal;
+		if (!quote && (sh->line[i] == 34 || sh->line[i] == 39))
+		{
+			quote = sh->line[i];
+			count = 1;
+		}
+		else if (sh->line[i] == quote)
+			count++;
 		i++;
 	}
-	if (semi % 2 || literal % 2)
+	if (count % 2)
 	{
 		free(sh->line);
-		ft_putendl("Minishell: missing quotes");
+		ft_error("Missing quotes");
 		return (0);
 	}
 	return (1);
