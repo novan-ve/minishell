@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:43:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/15 15:15:55 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/15 16:28:32 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		main(int ac, char **av, char **env)
 			continue ;
 		split_input(&sh);
 		parse_input(&sh);
-		prep_args(&sh);
 		show_args(&sh);    					//UNCOMMENT FOR DEBUGGING
 		execute(&sh);
 		clean(&sh);
