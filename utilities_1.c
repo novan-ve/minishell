@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:26:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 15:58:15 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/14 19:42:12 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int		ft_strlen(char *s)
 	int i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i] != '\0')
 		i++;
 	return (i);
@@ -44,6 +46,10 @@ int		ft_strcmp(char *s1, char *s2)
 	int		i;
 
 	i = 0;
+	if (!s1 && s2)
+		return (1);
+	if (!s2)
+		return (1);
 	while (s1[i])
 	{
 		if (s1[i] != s2[i])

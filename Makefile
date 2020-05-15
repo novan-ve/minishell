@@ -6,7 +6,7 @@
 #    By: abobas <abobas@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/13 15:12:27 by abobas        #+#    #+#                  #
-#    Updated: 2020/05/13 18:23:52 by abobas        ########   odam.nl          #
+#    Updated: 2020/05/14 16:59:18 by abobas        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ MAN_OBJ = 	minishell.o \
 			prompt.o \
 			read_input.o \
 			split_input.o \
+			parse_input_1.o \
+			parse_input_2.o \
 			list.o \
 			execute.o \
 			builtins.o \
