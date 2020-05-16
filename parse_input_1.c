@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/14 16:16:35 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/14 21:50:21 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/15 16:28:44 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_bool(t_minishell *sh)
 	}
 }
 
-void    parse_literals(t_minishell *sh)
+void    parse_quotes(t_minishell *sh)
 {
 	int     i;
 	
@@ -65,6 +65,7 @@ void    parse_literals(t_minishell *sh)
 void    parse_input(t_minishell *sh)
 {
 	init_bool(sh);
-	parse_literals(sh);
+	parse_quotes(sh);
 	parse_env(sh);
+	prep_args(sh);
 }

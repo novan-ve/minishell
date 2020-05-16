@@ -6,21 +6,42 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 14:28:55 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/15 13:58:45 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/15 17:54:20 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int		word_loop(t_minishell *sh, int i)
+{
+	int		count;
+	int		quote;
+
+	count = 0;
+	quote = 0;
+	while (sh->line[i] != '\0')
+	{
+		if (ft_isspace(sh->line[i]) && !(count % 2))
+			break;
+		if (sh->line[i] == ';' && !quote)
+			break ;
+		if ((sh->line[i] == 34 || sh->line[i] == 39) && !quote)
+		{
+			quote = sh->line[i];
+			count++;
+		}
+		else if (sh->line[i] == quote)
+			count++;
+		i++;
+	}
+	return (i);
+}
+
 void	count(t_minishell *sh)
 {
 	int		i;
-	int		check;
-	int		check2;
 
 	i = 0;
-	check = 0;
-	check2 = 0;
 	sh->arg_count = 0;
 	while (sh->line[i] != '\0')
 	{
@@ -33,16 +54,7 @@ void	count(t_minishell *sh)
 		}
 		else
 		{
-			while (sh->line[i] != '\0' && sh->line[i] != ';')
-			{
-				if (ft_isspace(sh->line[i]) && !(check % 2) && !(check2 % 2))
-					break;
-				if (sh->line[i] == 34)
-					check++;
-				if (sh->line[i] == 39)
-					check2++;
-				i++;
-			}
+			i = word_loop(sh, i);
 			sh->arg_count++;
 		}
 	}
@@ -53,13 +65,9 @@ void	split(t_minishell *sh)
 	int		i;
 	int		j;
 	int		start;
-	int		check;
-	int		check2;
 
 	i = 0;
 	j = 0;
-	check = 0;
-	check2 = 0;
 	if (sh->line[i] == '\0')
 	{
 		sh->args[j] = ft_strdup("");
@@ -78,16 +86,7 @@ void	split(t_minishell *sh)
 		else
 		{
 			start = i;
-			while (sh->line[i] != '\0' && sh->line[i] != ';')
-			{
-				if (ft_isspace(sh->line[i]) && !(check % 2) && !(check2 % 2))
-					break;
-				if (sh->line[i] == 34)
-					check++;
-				if (sh->line[i] == 39)
-					check2++;
-				i++;
-			}
+			i = word_loop(sh, i);
 			sh->args[j] = ft_substr(sh->line, start, i - start);
 			j++;
 		}

@@ -6,13 +6,13 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:55:19 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 16:11:11 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/15 17:44:41 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	read_input(t_minishell *sh)
+void	read_loop(t_minishell *sh)
 {
 	int		bufsize;
 	int		i;
@@ -20,9 +20,6 @@ void	read_input(t_minishell *sh)
 
 	bufsize = 1024;
 	i = 0;
-	sh->line = (char*)malloc(sizeof(char) * bufsize);
-	if (!sh->line)
-		exit(EXIT_FAILURE);
 	while (1)
 	{
 		if (read(0, &ch, 1) < 0)
@@ -41,4 +38,12 @@ void	read_input(t_minishell *sh)
 			sh->line = ft_reallocate(sh->line, bufsize - 1024, bufsize);
 		}
 	}
+}
+
+void	read_input(t_minishell *sh)
+{
+	sh->line = (char*)malloc(sizeof(char) * 1024);
+	if (!sh->line)
+		exit(EXIT_FAILURE);
+	read_loop(sh);
 }

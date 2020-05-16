@@ -6,18 +6,18 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 17:00:39 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/15 13:25:55 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/15 17:16:33 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char        *ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	int     length;
-	char    *new;
-	int     i;
-	int     y;
+	int		length;
+	char	*new;
+	int		i;
+	int		y;
 
 	i = 0;
 	y = 0;
@@ -48,12 +48,12 @@ char        *ft_strjoin(char *s1, char *s2)
 	return (new);
 }
 
-char    *ft_trim(char *src)
+char	*ft_trim(char *src)
 {
-	char    *dst;
-	int     i;
-	int     y;
-	int     length;
+	char	*dst;
+	int		i;
+	int		y;
+	int		length;
 
 	length = ft_strlen(src) - 1;
 	i = 0;
@@ -70,28 +70,4 @@ char    *ft_trim(char *src)
 	dst[i] = '\0';
 	free(src);
 	return (dst);
-}
-
-int		quote_check(t_minishell *sh)
-{
-	int		i;
-	int		semi;
-	int		literal;
-
-	i = 0;
-	semi = 0;
-	literal = 0;
-	while (sh->line[i])
-	{
-		semi = (sh->line[i] == 34) ? semi + 1 : semi;
-		literal = (sh->line[i] == 39) ? literal + 1 : literal;
-		i++;
-	}
-	if (semi % 2 || literal % 2)
-	{
-		free(sh->line);
-		ft_putendl("Minishell: missing quotes");
-		return (0);
-	}
-	return (1);
 }

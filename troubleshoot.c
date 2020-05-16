@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/12 13:41:10 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/14 21:33:05 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/15 17:06:41 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void		show_args(t_minishell *sh)
 {
-	int i = 0;
-
-	printf("arg_count = %d\n", sh->arg_count);
+	int i;
+	
+	i = 0;
 	while (i < sh->arg_count)
 	{
 		if (sh->args[i] != 0)
-			printf("%s\n", sh->args[i]);
+			printf("argument[%d] = \"%s\"\n", i, sh->args[i]);
 		i++;
 	}
 }
