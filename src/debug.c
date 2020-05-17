@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/12 13:41:10 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/17 16:02:20 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/18 00:23:55 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void		show_data(t_minishell *sh)
 	}
 }
 
-void		debug_minishell(t_minishell *sh)
+void		debug(t_minishell *sh)
 {
 	show_linecount(sh);
 	show_argcount(sh);

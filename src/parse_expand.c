@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 23:45:04 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/17 23:57:44 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/18 00:20:32 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		parse_expand(t_minishell *sh)
 		}
 		i++;
 	}
-	if (!parse_sanitize(sh)) ///// HAALT ALLE ARGUMENTS NULL-POINTER ZIJN ER TUSSEN UIT
+	if (!parse_sanitize(sh)) ///// HAALT ALLE ARGUMENTS NULL-POINTER ER TUSSEN UIT
 		return (0);
 	return (1);
 }

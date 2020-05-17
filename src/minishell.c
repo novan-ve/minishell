@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/16 17:04:31 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/17 23:55:15 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/18 00:23:44 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	minishell(t_minishell *sh)
 			continue ;
 		if (!parse(sh))
 			continue ;
-		//debug_minishell(sh);               /// UNCOMMENT FOR DEBUGGING
+		debug(sh);               /// UNCOMMENT FOR DEBUGGING
 		//if (!execute(sh))
 		//	continue ;
 	}
 }
 
-int			main(int ac, char **av, char **env)
+int		main(int ac, char **av, char **env)
 {
 	t_minishell		sh;
 	t_vector		v;

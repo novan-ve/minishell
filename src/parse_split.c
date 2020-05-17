@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/16 20:44:49 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/17 23:31:48 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/18 00:32:46 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int				traverse_word(t_minishell *sh, int i)
 	{
 		if (is_space(sh->line[i]) && !(count % 2))
 			break ;
-		if (sh->line[i] == ';' && !quote)
+		if (sh->line[i] == ';' && !(count % 2))
 			break ;
 		if ((sh->line[i] == 34 || sh->line[i] == 39) && !quote)
 		{

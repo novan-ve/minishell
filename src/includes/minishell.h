@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/17 23:55:51 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/18 00:24:05 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ int				is_space(char c);
 int				is_semi(char *str);
 int				is_literal(char *str);
 
-void			debug_minishell(t_minishell *sh);
+void			debug(t_minishell *sh);
 
 #endif

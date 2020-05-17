@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/12 14:10:32 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/17 15:22:12 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/18 00:10:28 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void    reset(t_minishell *sh)
 	sh->args = 0;
 	if (sh->data)
 		free_data(sh->data, sh->line_count);
+	sh->data = 0;
 	if (sh->arg_count)
 		free(sh->arg_count);
 	sh->arg_count = 0;
