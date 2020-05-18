@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:26:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/17 23:31:18 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/18 20:15:52 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	***allocate_array(int line_count, int *arg_count)
 {
 	char	***array;
 	int		i;
-	
+
 	i = 0;
 	array = (char***)malloc(sizeof(char**) * line_count + 1);
 	if (!array)
@@ -47,7 +47,7 @@ char	***allocate_array(int line_count, int *arg_count)
 int		*allocate_counter(int line_count)
 {
 	int		*counter;
-	
+
 	counter = (int*)malloc(sizeof(int) * line_count);
 	if (!counter)
 	{

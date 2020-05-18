@@ -6,7 +6,7 @@
 #    By: abobas <abobas@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/13 15:12:27 by abobas        #+#    #+#                  #
-#    Updated: 2020/05/18 15:10:36 by abobas        ########   odam.nl          #
+#    Updated: 2020/05/18 20:14:01 by abobas        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC = 			minishell.c \
 				utilities_1.c \
 				utilities_2.c \
 				utilities_3.c \
+				utilities_4.c \
 				debug.c
 
 SRC :=			$(SRC:%=$(SRC_DIR)%)
