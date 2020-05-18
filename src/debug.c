@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/12 13:41:10 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/18 00:23:55 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/18 01:53:07 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		show_args(t_minishell *sh)
 				ft_printf("arg[%d][%d] = \"%s\"\n", x, y, sh->args[x][y]);
 			y++;
 		}
+		ft_printf("\n");
 		x++;
 	}
 }
@@ -62,16 +63,21 @@ void		show_data(t_minishell *sh)
 			ft_printf("data[%d][%d] = %d\n", i, j, sh->data[i][j]);
 			j++;
 		}
+		ft_printf("\n");
 		i++;
 	}
 }
 
 void		debug(t_minishell *sh)
 {
+	ft_printf("\n========================DEBUGGER========================\n");
 	show_linecount(sh);
+	ft_printf("\n");
 	show_argcount(sh);
+	ft_printf("\n");
 	if (sh->args)
 		show_args(sh);
 	if (sh->data)
 		show_data(sh);
+	ft_printf("========================================================\n\n");
 }

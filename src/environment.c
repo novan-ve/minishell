@@ -6,11 +6,13 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 00:53:59 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/17 23:36:55 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/18 03:09:54 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+#include <string.h>
+#include <errno.h>
 
 int			vector_search_env(t_vector *v, char *reference)
 {
@@ -23,7 +25,7 @@ int			vector_search_env(t_vector *v, char *reference)
 			return (index);
 		index++;
 	}
-	return (0);
+	return (-1);
 }
 
 char		*get_env(t_minishell *sh, char *env)
@@ -33,4 +35,46 @@ char		*get_env(t_minishell *sh, char *env)
 	if (!(tmp = vector_get(sh->env, vector_search_env(sh->env, env))))
 		return (0);
 	return (ft_substr(tmp, ft_strlen(env) + 1, ft_strlen(tmp) - ft_strlen(env)));
+}
+
+void		export(int ac, char **av, t_minishell *sh)
+{
+	int		i;
+	char	*insert;
+	
+	i = 1;
+	if (ac > 1)
+	{
+		while (i < ac)
+		{
+			if (is_env(av[i]))
+			{
+				if (!(insert = ft_strdup(av[i])))
+					put_error(strerror(errno));
+				else
+					vector_add(sh->env, insert);
+			}
+			i++;
+		}
+	}
+}
+
+void	unset(int ac, char **av, t_minishell *sh)
+{
+	int		delete;
+	int		i;
+
+	i = 1;
+	if (ac > 1)
+	{
+		while (i < ac)
+		{
+			if (is_env(av[i]))
+				put_error("Not a valid identifier");
+			delete = vector_search_env(sh->env, av[i]);
+			if (delete > 0)
+				vector_delete(sh->env, delete);
+			i++;
+		}
+	}
 }
