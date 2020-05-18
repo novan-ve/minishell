@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 02:38:51 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/18 02:29:16 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/18 03:14:22 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		is_env(char *str)
 	int		i;
 
 	i = 0;
-	while (i < ft_strlen(str))
+	while (str[i] != '\0')
 	{
 		if (str[i] == '=')
 			return (1);
