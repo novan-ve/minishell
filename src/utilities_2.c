@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 02:38:51 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/18 23:32:03 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/19 13:15:20 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ int		expand_length(t_minishell *sh, char *src)
 			while (is_var_char(src[i]))
 				i++;
 			if (!(var = ft_substr(src, start, i - start)))
+			{
+				put_error(strerror(errno));
 				return (-1);
+			}
 			env = get_env(sh, var);
 			free(var);
 			length += ft_strlen(env);
