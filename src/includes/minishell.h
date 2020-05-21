@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/18 03:11:06 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/21 12:44:51 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int				parse_validate(t_minishell *sh);
 int				parse_quotes(t_minishell *sh);
 int				parse_expand(t_minishell *sh);
 
+void			execute_bin(char **av, t_minishell *sh);
 void			execute(t_minishell *sh);
 void			pwd(void);
 void			echo(int ac, char **av);
