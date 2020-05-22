@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/19 00:25:13 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/22 17:47:39 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/22 19:12:47 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,52 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include <signal.h>
 
-void	waiting(pid_t pid, t_minishell *sh)
+void	signal_catch()
+{
+}
+
+void	exit_status(int exit, t_minishell *sh)
+{
+	char	*number;
+	char	*insert;
+
+	if (!(number = ft_itoa(exit)))
+	{
+		put_error(strerror(errno));
+		return ;
+	}
+	insert = ft_strjoin("?=", number);
+	free(number);
+	if (!insert)
+	{
+		put_error(strerror(errno));
+		return ;
+	}
+	env_add(insert, sh->env);
+	free(insert);
+}
+
+void	waiting(t_minishell *sh)
 {
 	int		status;
+	int		exit;
 
-	status = 1;
 	while (1)
 	{
-		waitpid(pid, &status, WUNTRACED);			/// UNTRACED PARENT PROCESS TO ESCAPE SIGNALS ????
+		signal(SIGINT, signal_catch);
+		signal(SIGQUIT, signal_catch);
+		wait(&status);												
 		if (WIFEXITED(status))
 		{					
-			ft_printf("exit status = %d\n", WEXITSTATUS(status));					////WEXITSTATUS(status) for process exit status // 1, 0 zijn program exit status
-			env_add("?=0", sh->env);
+			exit = WEXITSTATUS(status);	
+			if (!exit)
+				env_add("?=0", sh->env);
+			else
+				exit_status(exit, sh);
 			return ;
 		}
-		//if (WIFSIGNALED(status))					/// SIGNAL STOP ??
-		//{
-		//	env_delete("?", sh->env);
-		//	env_add("?=2", sh->env);
-		//	return ;
-		//}
 	}
 }
 
@@ -59,5 +84,5 @@ void	execute(char **av, t_minishell *sh)
 		}
 	}
 	else
-		waiting(pid, sh);
+		waiting(sh);
 }

@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/15 21:14:01 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/22 14:47:01 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/22 19:02:13 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char				*ft_strtrim(char *src, int n);
 char				*ft_realloc(char *src, int old_size, int new_size);
 char				*ft_readline(int fd, int buf_size);
 char				*ft_readfile(int fd, int buf_size);
+char				*ft_itoa(int n);
 int					ft_strcmp(char *s1, char *s2);
 int					ft_strncmp(char *s1, char *s2, int n);
 int					ft_strlen(char *str);
