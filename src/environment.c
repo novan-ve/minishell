@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 00:53:59 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/19 02:30:51 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/22 13:48:04 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	env_add(char *reference, t_vector *v)
 	if (!(insert = ft_strdup(reference)))
 		put_error(strerror(errno));
 	else
-		vector_add(v, insert);
+	{
+		if (!vector_add(v, insert))
+			put_error(strerror(errno));
+	}
 }
 
 void	unset(int ac, char **av, t_minishell *sh)

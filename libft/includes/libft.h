@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/15 21:14:01 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/17 14:58:09 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/22 13:42:14 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ typedef struct		s_vector
 char				*vector_get(t_vector *v, int index);
 int					vector_total(t_vector *v);
 int					vector_search(t_vector *v, char *reference);
-void				vector_init(t_vector *v);
-void				vector_resize(t_vector *v, int capacity);
-void				vector_populate(t_vector *v, char **source);
+int					vector_init(t_vector *v);
+int					vector_resize(t_vector *v, int capacity);
+int					vector_populate(t_vector *v, char **source);
+int					vector_add(t_vector *v, char *data);
 void				vector_print(t_vector *v);
 void				vector_debug(t_vector *v);
 void				vector_free(t_vector *v);
-void				vector_add(t_vector *v, char *data);
 void				vector_set(t_vector *v, int index, char *data);
 void				vector_delete(t_vector *v, int index);
 
