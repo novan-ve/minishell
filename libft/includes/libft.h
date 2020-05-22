@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/15 21:14:01 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/22 13:42:14 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/22 14:47:01 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void				vector_free(t_vector *v);
 void				vector_set(t_vector *v, int index, char *data);
 void				vector_delete(t_vector *v, int index);
 
+char				**ft_split(char *str, char c);
 char				*ft_strjoin(char *s1, char *s2);
 char				*ft_substr(char *str, int start, int length);
 char				*ft_strdup(char *str);
