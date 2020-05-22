@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/19 00:25:13 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/22 19:12:47 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/22 19:21:55 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ void	execute(char **av, t_minishell *sh)
 	{
 		if (execve(av[0], av, sh->env->data) < 0)
 		{
-			env_add("?=1", sh->env);
-			put_error(strerror(errno));
-			exit(1);
+			put_error("Command not found");
+			exit(127);
 		}
 	}
 	else
