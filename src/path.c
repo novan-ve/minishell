@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 13:10:17 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/22 16:19:50 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/22 19:45:36 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <sys/types.h>
 
 
-void		free_path_array(char **path_array)
+void			free_path_array(char **path_array)
 {
 	int			i;
 
