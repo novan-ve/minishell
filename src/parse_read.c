@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   troubleshoot.c                                     :+:    :+:            */
+/*   parse_read.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/05/12 13:41:10 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/15 17:06:41 by abobas        ########   odam.nl         */
+/*   Created: 2020/05/16 20:29:02 by abobas        #+#    #+#                 */
+/*   Updated: 2020/05/17 23:32:39 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "includes/minishell.h"
+#include <string.h>
+#include <errno.h>
 
-void		show_args(t_minishell *sh)
+int		parse_read(t_minishell *sh)
 {
-	int i;
-	
-	i = 0;
-	while (i < sh->arg_count)
+	sh->line = ft_readline(0, 128);
+	if (!sh->line)
 	{
-		if (sh->args[i] != 0)
-			printf("argument[%d] = \"%s\"\n", i, sh->args[i]);
-		i++;
+		put_error(strerror(errno));
+		return (0);
 	}
+	if (sh->line[0] == '\0')
+		return (0);
+	return (1);
 }

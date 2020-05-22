@@ -6,33 +6,42 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:50:21 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/13 15:39:57 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/21 12:45:23 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "includes/minishell.h"
+#include <stdlib.h>
+
+void	execute_line(int arg_count, char **args, t_minishell *sh)
+{
+	if (!ft_strcmp(args[0], "exit"))
+		exit(0);
+	if (!ft_strcmp(args[0], "pwd"))
+		pwd();
+	else if (!ft_strcmp(args[0], "cd"))
+		cd(arg_count, args, sh);
+	else if (!ft_strcmp(args[0], "echo"))
+		echo(arg_count, args);
+	else if (!ft_strcmp(args[0], "env"))
+		vector_print(sh->env);
+	else if (!ft_strcmp(args[0], "export"))
+		export(arg_count, args, sh);
+	else if (!ft_strcmp(args[0], "unset"))
+		unset(arg_count, args, sh);
+	else
+		execute_bin(args, sh);
+}
 
 void	execute(t_minishell *sh)
 {
-	sh->arg_index = 0;
-	while (sh->arg_index < sh->arg_count)
+	int		i;
+	
+	i = 0;
+	while (i < sh->line_count)
 	{
-		if (!ft_strcmp(sh->args[sh->arg_index], "cd"))
-			builtin_cd(sh);
-		else if (!ft_strcmp(sh->args[sh->arg_index], "exit"))
-			builtin_exit();
-		else if (!ft_strcmp(sh->args[sh->arg_index], "pwd"))
-			builtin_pwd();
-		else if (!ft_strcmp(sh->args[sh->arg_index], "echo"))
-			builtin_echo(sh);
-		else if (!ft_strcmp(sh->args[sh->arg_index], "env"))
-			env_show(sh);
-		else if (!ft_strcmp(sh->args[sh->arg_index], "export"))
-			env_export(sh);
-		else if (!ft_strcmp(sh->args[sh->arg_index], "unset"))
-			env_unset(sh);
-		//else
-		//	launch(sh);
-		sh->arg_index++;
+		execute_line(sh->arg_count[i], sh->args[i], sh);
+		i++;
 	}
 }
+

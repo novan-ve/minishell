@@ -6,65 +6,60 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:44:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/15 15:03:32 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/18 01:37:05 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "includes/minishell.h"
+#include <string.h>
+#include <errno.h>
+#include <unistd.h>
 
-void	builtin_echo(t_minishell *sh)
+void	echo(int ac, char **av)
 {
 	int		newline;
+	int		i;
 
 	newline = 1;
-	sh->arg_index++;
-	if (!ft_strcmp(sh->args[sh->arg_index], "-n"))
+	i = 1;
+	if (ac > 1)
 	{
-		newline = 0;
-		sh->arg_index++;
+		if (!ft_strcmp(av[i], "-n"))
+		{
+			newline = 0;
+			i++;
+		}
+		while (i < ac)
+		{
+			ft_printf("%s", av[i]);
+			if (i + 1 != ac)
+				ft_printf(" ");
+			i++;
+		}
 	}
-	while (sh->arg_index < sh->arg_count)
-	{
-		if (sh->args[sh->arg_index][0] == ';')
-				break ;
-		ft_putstr(sh->args[sh->arg_index]);
-		write(1, " ", 1);
-		sh->arg_index++;
-	}
-	if (newline)
-		write(1, "\n", 1);
+	if (newline == 1)
+		ft_printf("\n");
 }
 
-void	builtin_cd(t_minishell *sh)
+void	cd(int ac, char **av, t_minishell *sh)
 {
-	if (sh->args[sh->arg_index + 1] == 0)
+	if (ac == 1)
 	{
 		if (chdir(get_env(sh, "HOME")))
-			ft_error(strerror(errno));
+			put_error(strerror(errno));
 	}
-	else if (sh->args[sh->arg_index + 2] != 0)
-	{
-		ft_error("too many arguments");
-		return ;
-	}
-	else if (chdir(sh->args[sh->arg_index + 1]))
-	{
-		ft_error(strerror(errno));
-		sh->arg_index++;
-	}
+	else if (ac > 2)
+		put_error("Too many arguments");
+	else if (chdir(av[1]))
+		put_error(strerror(errno));
 }
 
-void	builtin_exit(void)
-{
-	exit(EXIT_SUCCESS);
-}
-
-void	builtin_pwd(void)
+void	pwd(void)
 {
 	char	path[1024];
 
 	if (!getcwd(path, 1024))
-		ft_error(strerror(errno));
+		put_error(strerror(errno));
 	else
-		ft_putendl(path);
+		ft_printf("%s\n", (path));
 }
