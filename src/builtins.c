@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:44:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/18 01:37:05 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/22 18:00:48 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <errno.h>
 #include <unistd.h>
 
-void	echo(int ac, char **av)
+void	echo(int ac, char **av, t_minishell *sh)
 {
 	int		newline;
 	int		i;
@@ -39,6 +39,7 @@ void	echo(int ac, char **av)
 	}
 	if (newline == 1)
 		ft_printf("\n");
+	env_add("?=0", sh->env);
 }
 
 void	cd(int ac, char **av, t_minishell *sh)
@@ -46,20 +47,42 @@ void	cd(int ac, char **av, t_minishell *sh)
 	if (ac == 1)
 	{
 		if (chdir(get_env(sh, "HOME")))
+		{
 			put_error(strerror(errno));
+			env_add("?=1", sh->env);
+		}
+		else
+			env_add("?=0", sh->env);
 	}
 	else if (ac > 2)
+	{
 		put_error("Too many arguments");
-	else if (chdir(av[1]))
-		put_error(strerror(errno));
+		env_add("?=1", sh->env);
+	}
+	else
+	{
+		if (chdir(av[1]))
+		{
+			put_error(strerror(errno));
+			env_add("?=1", sh->env);
+		}
+		else
+			env_add("?=0", sh->env);
+	}
 }
 
-void	pwd(void)
+void	pwd(t_minishell *sh)
 {
 	char	path[1024];
 
 	if (!getcwd(path, 1024))
+	{
 		put_error(strerror(errno));
+		env_add("?=1", sh->env);
+	}
 	else
+	{
 		ft_printf("%s\n", (path));
+		env_add("?=0", sh->env);
+	}
 }

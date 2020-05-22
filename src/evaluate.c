@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:50:21 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/19 00:32:47 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/22 18:29:48 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	evaluate_line(int arg_count, char **args, t_minishell *sh)
 	if (!ft_strcmp(args[0], "exit"))
 		exit(0);
 	if (!ft_strcmp(args[0], "pwd"))
-		pwd();
+		pwd(sh);
 	else if (!ft_strcmp(args[0], "cd"))
 		cd(arg_count, args, sh);
 	else if (!ft_strcmp(args[0], "echo"))
-		echo(arg_count, args);
+		echo(arg_count, args, sh);
 	else if (!ft_strcmp(args[0], "env"))
-		vector_print(sh->env);
+		env_show(sh);
 	else if (!ft_strcmp(args[0], "export"))
 		export(arg_count, args, sh);
 	else if (!ft_strcmp(args[0], "unset"))
