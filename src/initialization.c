@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 03:49:40 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/22 13:46:20 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/23 16:16:22 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_minishell	init_minishell(void)
 	sh.line = 0;
 	sh.args = 0;
 	sh.data = 0;
+	sh.file_descriptors = 0;
 	sh.line_count = 0;
 	sh.arg_count = 0;
 	return (sh);
