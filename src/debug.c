@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/12 13:41:10 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/18 01:53:07 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/23 00:55:40 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void		debug(t_minishell *sh)
 	ft_printf("\n========================DEBUGGER========================\n");
 	show_linecount(sh);
 	ft_printf("\n");
-	show_argcount(sh);
+	if (sh->arg_count)
+		show_argcount(sh);
 	ft_printf("\n");
 	if (sh->args)
 		show_args(sh);

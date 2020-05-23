@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/22 18:29:15 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/23 00:47:01 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int				is_double_quote(char *str);
 int				is_single_quote(char *str);
 int				is_var(char *str);
 int				is_var_char(char c);
+int				is_redirect(char c);
 int				is_env(char *str);
 
 void			debug(t_minishell *sh);

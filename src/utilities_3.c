@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 02:38:51 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/18 23:32:18 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/23 15:14:05 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ int		is_env(char *str)
 
 int		is_double_quote(char *str)
 {
-	if (str[0] == '\'' && str[ft_strlen(str) - 1] == '\'')
+	if (str[0] == '"' && str[ft_strlen(str) - 1] == '"')
 		return (1);
 	return (0);
 }
 
 int		is_single_quote(char *str)
 {
-	if (str[0] == '"' && str[ft_strlen(str) - 1] == '"')
+	if (str[0] == '\'' && str[ft_strlen(str) - 1] == '\'')
 		return (1);
 	return (0);
 }

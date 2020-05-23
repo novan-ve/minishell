@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/18 20:12:43 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/18 20:13:37 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/23 00:46:43 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 int		is_space(char c)
 {
 	return (c == ' ' || c == '\t' || c == '\r' || c == '\n' || c == '\a');
+}
+
+int		is_redirect(char c)
+{
+	return (c == '>' || c == '|' || c == '<');
 }
 
 void	put_error(char *s)
