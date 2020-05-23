@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:50:21 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/24 00:15:47 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 00:18:14 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <string.h>
 #include <unistd.h>
 
-void	evaluate_line(int arg_count, char **args, t_minishell *sh)
+void	evaluate_commands(int arg_count, char **args, t_minishell *sh)
 {
 	if (!ft_strcmp(args[0], "exit"))
 		exit(0);
@@ -78,7 +78,7 @@ void	evaluate(t_minishell *sh)
 	{
 		export_command(sh->args[i][0], sh);
 		set_file_descriptor(sh, i);
-		evaluate_line(sh->arg_count[i], sh->args[i], sh);
+		evaluate_commands(sh->arg_count[i], sh->args[i], sh);
 		reset_file_descriptor(sh, i);
 		i++;
 	}

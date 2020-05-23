@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/15 17:11:46 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/23 15:34:18 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 00:26:38 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		quote_check(char *arg)
 int		redirect_check(t_minishell *sh, int i, int y)
 {
 	char	*arg;
+	char	*arg_2;
 	
 	arg = sh->args[i][y];
 	if (sh->data)
@@ -48,6 +49,9 @@ int		redirect_check(t_minishell *sh, int i, int y)
 			return (1);
 	}
 	if (is_redirect(arg[0]) && y + 1 == sh->arg_count[i])
+		return (0);
+	arg_2 = sh->args[i][y + 1];
+	if (is_redirect(arg[0]) && is_redirect(arg_2[0]))
 		return (0);
 	if (arg[0] == '>' && ft_strlen(arg) > 2)
 		return (0);
