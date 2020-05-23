@@ -6,126 +6,90 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 23:45:04 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/18 15:45:21 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/19 13:13:23 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 #include <stdlib.h>
-#include <stdio.h>
+#include <string.h>
+#include <errno.h>
 
-int		is_envchar(char c)
-{
-	return (c != ';' && c != '$' && c != 39 && !is_space(c) && c);
-}
-
-int		check_env(char *arg)
+int		expand(int j, char *dst, char *env, t_minishell *sh)
 {
 	int		i;
-
-	i = 0;
-	while (arg[i] != '\0')
+	char	*src;
+	
+	if (!env)
 	{
-		if (arg[i] == 36)
-			return (i + 1);
-		i++;
+		put_error(strerror(errno));
+		free(dst);
+		return (-1);
 	}
-	return (0);
-}
-
-int		substitute_len(t_minishell *sh, char *s)
-{
-	int		i;
-	int		len;
-	int		start;
-	char	*tmp;
-
-	i = 0;
-	len = 0;
-	while (s[i])
+	src = get_env(sh, env);
+	free(env);
+	if (src)
 	{
-		i++;
-		if (s[i - 1] != '$')
-			len++;
-		else
+		i = 0;
+		while (src[i] != '\0')
 		{
-			start = i;
-			while (is_envchar(s[i]))
-				i++;
-			tmp = ft_substr(s, start, i - start);
-			if (!tmp)
-				return (-1);
-			len += ft_strlen(get_env(sh, tmp));
+			dst[j] = src[i];
+			j++;
+			i++;
 		}
+		free(src);
 	}
-	return (len);
+	return (j);
 }
 
-int		substitute_env2(t_minishell *sh, char *arg, char *tmp, int len)
+char	*expand_arg(t_minishell *sh, char* dst, char *src)
 {
 	int		i;
 	int		j;
 	int		start;
-	char	*tmp2;
-	char	*result;
 
 	i = 0;
 	j = 0;
-	while (i < len)
+	while (src[i] != '\0')
 	{
-		j++;
-		if (tmp[j - 1] != '$')
+		i++;
+		if (src[i - 1] == '$' && is_var_char(src[i]))
 		{
-			arg[i] = tmp[j - 1];
-			i++;
+			start = i;
+			while (is_var_char(src[i]))
+				i++;
+			if ((j = expand(j, dst, ft_substr(src, start, i - start), sh)) < 0)
+				return (0);
 		}
 		else
 		{
-			start = j;
-			while (is_envchar(tmp[j]))
-				j++;
-			tmp2 = ft_substr(tmp, start, j - start);
-			if (!tmp2)
-				return (0);
-			result = get_env(sh, tmp2);
-			free(tmp2);
-			start = 0;
-			if (result)
-				while (result[start])
-				{
-					arg[i] = result[start];
-					i++;
-					start++;
-				}
-			if (result)
-				free(result);
+			dst[j] = src[i - 1];
+			j++;
 		}
 	}
-	arg[i] = '\0';
-	return (1);
+	dst[j] = '\0';
+	return (dst);
 }
 
-char	*substitute_env(t_minishell *sh, char *arg)
+char	*expand_var(t_minishell *sh, char *src)
 {
-	char	*tmp;
-	int		len;
+	char	*dst;
+	int		length;
 
-	tmp = ft_strdup(arg);
-	if (!tmp)
+	if ((length = expand_length(sh, src)) < 0)
 		return (0);
-	len = substitute_len(sh, arg);
-	if (len == -1)
+	if (!(dst = (char*)malloc(sizeof(char) * length + 1)))
+	{
+		free(src);
+		put_error(strerror(errno));
 		return (0);
-	free(arg);
-	arg = malloc(sizeof(char) * len + 1);
-	if (!arg)
-		return (0);
-	if (!substitute_env2(sh, arg, tmp, len))
-		return (0);
-	return (arg);
+	}
+	dst = expand_arg(sh, dst, src);
+	free(src);
+	return (dst);
 }
 
-int		parse_expand(t_minishell *sh)
+int		parse_expand_loop(t_minishell *sh)
 {
 	int		i;
 	int		j;
@@ -136,16 +100,27 @@ int		parse_expand(t_minishell *sh)
 		j = 0;
 		while (j < sh->arg_count[i])
 		{
-			if (check_env(sh->args[i][j]) > 0 && sh->data[i][j] != 1)
+			if (is_var(sh->args[i][j]) > 0 && sh->data[i][j] != 1)
 			{
-				sh->args[i][j] = substitute_env(sh, sh->args[i][j]);
-				if (!sh->args[i][j])
+				if (!(sh->args[i][j] = expand_var(sh, sh->args[i][j])))
 					return (0);
+				if (ft_strlen(sh->args[i][j]) == 0 && sh->data[i][j] == 0)
+				{
+					free(sh->args[i][j]);
+					sh->args[i][j] = 0;
+				}
 			}
 			j++;
 		}
 		i++;
 	}
+	return (1);
+}
+
+int		parse_expand(t_minishell *sh)
+{
+	if (!parse_expand_loop(sh))
+		return (0);
 	if (!parse_sanitize(sh))
 		return (0);
 	return (1);

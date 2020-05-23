@@ -6,35 +6,15 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 15:49:50 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/17 23:42:52 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/18 22:25:25 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
-#include <fcntl.h>
 #include <string.h>
 #include <errno.h>
-#include <unistd.h>
 #include <stdlib.h>
-
-char	*get_host(void)
-{
-	int		fd;
-	char	*host;
-
-	if ((fd = open("/proc/sys/kernel/hostname", O_RDONLY)) < 0)
-	{
-		put_error(strerror(errno));
-		return (0);
-	}
-	if (!(host = ft_readline(fd, 64)))
-	{
-		put_error("Reading hostname has failed");
-		return (0);
-	}	
-	close(fd);
-	return (host);
-}
+#include <unistd.h>
 
 char	*shorten_dir(char *home, char *path)
 {
@@ -74,31 +54,24 @@ char	*get_dir(t_minishell *sh)
 		return (0);
 	}
 	if (!(home = get_env(sh, "HOME")))
-	{
-		put_error("Retrieving 'HOME' environment variable has failed");
 		return (0);
-	}
 	return (shorten_dir(home, path));
 }
 
 int		prompt(t_minishell *sh)
 {
-	char	*host;
 	char	*dir;
 	char	*user;
 	char	ret;
 
 	ret = 0;
 	user = get_env(sh, "USER");
-	host = get_host();
 	dir = get_dir(sh);
-	if (user && host && dir)
+	if (user && dir)
 	{
-		ft_printf("%s@%s:%s$ ", user, host, dir);
+		ft_printf("%s:%s$ ", user, dir);
 		ret = 1;
 	}
-	if (host)
-		free(host);
 	if (dir)
 		free(dir);
 	if (user)

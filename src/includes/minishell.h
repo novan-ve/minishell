@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/21 12:44:51 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/22 18:29:15 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,19 @@ int				parse_validate(t_minishell *sh);
 int				parse_quotes(t_minishell *sh);
 int				parse_expand(t_minishell *sh);
 
-void			execute_bin(char **av, t_minishell *sh);
-void			execute(t_minishell *sh);
-void			pwd(void);
-void			echo(int ac, char **av);
+void			evaluate(t_minishell *sh);
+void			pwd(t_minishell *sh);
+void			echo(int ac, char **av, t_minishell *sh);
 void			cd(int ac, char **av, t_minishell *sh);
+
+void			env_add(char *reference, t_vector *v);
+void			env_delete(char *reference, t_vector *v);
+void			env_show(t_minishell *sh);
 void			export(int ac, char **av, t_minishell *sh);
 void			unset(int ac, char **av, t_minishell *sh);
-char			*get_env(t_minishell *sh, char *env);
+
+void			execute(char **av, t_minishell *sh);
+char			*get_executable(char *arg, t_minishell *sh);
 
 char			***allocate_array(int line_count, int *arg_count);
 int				**allocate_data(int line_count, int *arg_count);
@@ -53,11 +58,16 @@ int				*allocate_counter(int line_count);
 void    		free_array(char ***array, int line_count, int *arg_count);
 void			free_data(int **data, int line_count);
 int				env_cmp(char *reference, char *data);
-
+int				vector_search_env(t_vector *v, char *reference);
+char			*get_env(t_minishell *sh, char *env);
+char			*get_identifier(char *reference);
+int				expand_length(t_minishell *sh, char *src);
 void			put_error(char *s);
 int				is_space(char c);
-int				is_semi(char *str);
-int				is_literal(char *str);
+int				is_double_quote(char *str);
+int				is_single_quote(char *str);
+int				is_var(char *str);
+int				is_var_char(char c);
 int				is_env(char *str);
 
 void			debug(t_minishell *sh);

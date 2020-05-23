@@ -6,24 +6,35 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 03:49:40 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/17 15:20:20 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/22 13:46:20 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 #include <stdlib.h>
+#include <string.h>
+#include <errno.h>
 
 t_vector	init_env(char **env)
 {
 	t_vector		v;
 
-	vector_init(&v);
-	vector_populate(&v, env);
-	if (!v.data)
+	if (!vector_init(&v))
 	{
-		put_error("Retrieving environment variables has failed");
+		put_error(strerror(errno));
 		exit(1);
 	}
+	if (!vector_populate(&v, env))
+	{
+		put_error(strerror(errno));
+		exit(1);
+	}
+	if (!v.data)
+	{
+		put_error(strerror(errno));
+		exit(1);
+	}
+	env_add("?=0", &v);
 	return (v);
 }
 

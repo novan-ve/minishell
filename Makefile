@@ -6,7 +6,7 @@
 #    By: abobas <abobas@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/13 15:12:27 by abobas        #+#    #+#                  #
-#    Updated: 2020/05/21 12:46:21 by novan-ve      ########   odam.nl          #
+#    Updated: 2020/05/22 15:45:27 by abobas        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,14 @@ SRC = 			minishell.c \
 				parse_validate.c \
 				parse_quotes.c \
 				parse_expand.c \
+				evaluate.c \
 				execute.c \
-				launch.c \
+				path.c \
 				builtins.c \
 				utilities_1.c \
 				utilities_2.c \
 				utilities_3.c \
+				utilities_4.c \
 				debug.c
 
 SRC :=			$(SRC:%=$(SRC_DIR)%)
