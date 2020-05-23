@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 03:49:40 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/23 16:16:22 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 00:13:58 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <unistd.h>
 
 t_vector	init_env(char **env)
 {
@@ -49,5 +50,15 @@ t_minishell	init_minishell(void)
 	sh.file_descriptors = 0;
 	sh.line_count = 0;
 	sh.arg_count = 0;
+	if ((sh.saved_stdin = dup(STDIN_FILENO)) < 0)
+	{
+		put_error(strerror(errno));
+		exit(1);
+	}
+	if ((sh.saved_stdout = dup(STDOUT_FILENO)) < 0)
+	{
+		put_error(strerror(errno));
+		exit(1);
+	}
 	return (sh);
 }

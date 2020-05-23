@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/23 16:47:51 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 00:12:31 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef	struct		s_minishell
 	int				**file_descriptors;
 	int				line_count;
 	int				*arg_count;
+	int				saved_stdin;
+	int				saved_stdout;
 }					t_minishell;
 
 t_minishell		init_minishell(void);
