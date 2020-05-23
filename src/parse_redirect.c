@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/23 15:51:50 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/23 17:44:28 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 01:53:30 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 int		parse_output_redirect(t_minishell *sh, int i, int y)
 {
 	int		fd;
 
-	if (sh->file_descriptors[i][1] != 0)
+	if (sh->file_descriptors[i][0] != 0)
 		close(sh->file_descriptors[i][1]);
 	sh->file_descriptors[i][0] = 1;
 	if (!ft_strcmp(sh->args[i][y], ">>"))
@@ -42,16 +43,16 @@ int		parse_input_redirect(t_minishell *sh, int i, int y)
 {
 	int		fd;
 
-	if (sh->file_descriptors[i][1] != 0)
-		close(sh->file_descriptors[i][1]);
-	sh->file_descriptors[i][0] = 2;
+	if (sh->file_descriptors[i][2] != 0)
+		close(sh->file_descriptors[i][3]);
+	sh->file_descriptors[i][2] = 1;
 	fd = open(sh->args[i][y + 1], O_RDONLY);
 	if (fd < 0)
 	{
 		put_error(strerror(errno));
 		return (0);
 	}
-	sh->file_descriptors[i][1] = fd;
+	sh->file_descriptors[i][3] = fd;
 	sh->args[i][y] = 0;
 	sh->args[i][y + 1] = 0;
 	return (1);

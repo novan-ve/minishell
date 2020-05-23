@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/24 00:12:31 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 01:48:40 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef	struct		s_minishell
 	int				**file_descriptors;
 	int				line_count;
 	int				*arg_count;
-	int				saved_stdin;
 	int				saved_stdout;
+	int				saved_stdin;
 }					t_minishell;
 
 t_minishell		init_minishell(void);
@@ -53,7 +53,7 @@ void			env_show(t_minishell *sh);
 void			export(int ac, char **av, t_minishell *sh);
 void			unset(int ac, char **av, t_minishell *sh);
 
-void			execute(char **av, t_minishell *sh);
+void			execute(char **av, t_minishell *sh, int i);
 char			*get_executable(char *arg, t_minishell *sh);
 
 char			***allocate_array(int line_count, int *arg_count);
