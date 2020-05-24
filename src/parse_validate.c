@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/15 17:11:46 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 00:26:38 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 02:17:50 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ int		redirect_check(t_minishell *sh, int i, int y)
 	if (arg[0] == '>' && arg[1] != '\0' && arg[1] != '>')
 		return (0);
 	if (arg[0] == '<' && ft_strlen(arg) > 1)
-		return (0);
-	if (arg[0] == '|' && ft_strlen(arg) > 1)
 		return (0);
 	return (1);
 }

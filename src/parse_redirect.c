@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/23 15:51:50 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 02:01:30 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 02:16:13 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int		parse_redirection(t_minishell *sh, int i, int y)
 		if (!parse_input_redirect(sh, i, y))
 			return (0);
 	}
-	//else if (!ft_strcmp(sh->args[i][y], "|"))
 	return (1);
 }
 
