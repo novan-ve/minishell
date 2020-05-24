@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/23 15:51:50 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 01:53:30 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 02:01:30 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <stdlib.h>
 
 int		parse_output_redirect(t_minishell *sh, int i, int y)
 {
