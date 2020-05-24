@@ -6,7 +6,7 @@
 #    By: abobas <abobas@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/13 15:12:27 by abobas        #+#    #+#                  #
-#    Updated: 2020/05/24 16:22:22 by novan-ve      ########   odam.nl          #
+#    Updated: 2020/05/24 17:30:12 by novan-ve      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ ADD_LIB = 		-L $(LIB_DIR) -lft
 
 all: $(NAME)
 
-$(NAME): $(LIB) $(SRC) $(HEADER) 
+$(NAME): $(LIB) $(SRC) $(HEADER)
 	gcc $(FLAGS) $(SRC) $(ADD_LIB) -o $(NAME)
 
 %.a:

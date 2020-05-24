@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 13:10:17 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 13:17:35 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/24 17:26:57 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ char			*make_executable(char *bin, char *arg)
 	char	*new_bin;
 	char	*new_executable;
 
-	if (!(new_bin = ft_strjoin(bin, "/")))
+	new_bin = ft_strjoin(bin, "/");
+	if (!new_bin)
 	{
 		free(arg);
 		put_error(strerror(errno));
@@ -58,19 +59,22 @@ int				scan_directory(char *bin, char *arg)
 	DIR					*dir;
 	struct dirent		*dirent;
 
-	if (!(dir = opendir(bin)))
+	dir = opendir(bin);
+	if (!dir)
 	{
 		put_error(strerror(errno));
 		return (0);
 	}
 	errno = 0;
-	while ((dirent = readdir(dir)) != 0)
+	dirent = readdir(dir);
+	while (dirent != 0)
 	{
 		if (!ft_strcmp(dirent->d_name, arg))
 		{
 			closedir(dir);
 			return (1);
 		}
+		dirent = readdir(dir);
 	}
 	if (errno > 0)
 		put_error(strerror(errno));
@@ -101,7 +105,8 @@ char			*get_executable(char *arg, t_minishell *sh)
 	char		*path;
 	char		**path_array;
 
-	if (!(path = get_env(sh, "PATH")))
+	path = get_env(sh, "PATH");
+	if (!path)
 		return (arg);
 	path_array = ft_split(path, ':');
 	free(path);

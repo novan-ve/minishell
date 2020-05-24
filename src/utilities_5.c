@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/18 20:12:43 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 14:42:01 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/24 17:29:49 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ char	*get_identifier(char *reference)
 	{
 		if (reference[i] == '=')
 		{
-			if (!(identifier = ft_substr(reference, 0, i)))
+			identifier = ft_substr(reference, 0, i);
+			if (!identifier)
 			{
 				put_error(strerror(errno));
 				return (0);

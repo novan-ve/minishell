@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 15:04:12 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 14:05:56 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/24 17:18:28 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int		parse_double_quote(t_minishell *sh)
 
 int		parse_quotes(t_minishell *sh)
 {
-	if (!(sh->data = allocate_data(sh->line_count, sh->arg_count)))
+	sh->data = allocate_data(sh->line_count, sh->arg_count);
+	if (!sh->data)
 		return (0);
 	if (!parse_single_quote(sh))
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/16 20:44:49 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 16:24:40 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/24 17:21:56 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,12 @@ int				parse_split(t_minishell *sh)
 
 	i = 0;
 	count_lines(sh);
-	if (!(sh->arg_count = allocate_counter(sh->line_count)))
+	sh->arg_count = allocate_counter(sh->line_count);
+	if (!sh->arg_count)
 		return (0);
 	count_args(sh);
-	if (!(sh->args = allocate_array(sh->line_count, sh->arg_count)))
+	sh->args = allocate_array(sh->line_count, sh->arg_count);
+	if (!sh->args)
 		return (0);
 	if (!split(sh, i))
 		return (0);

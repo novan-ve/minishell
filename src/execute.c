@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/19 00:25:13 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 13:21:39 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/24 17:12:40 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	exit_status(int exit, t_minishell *sh)
 	char	*number;
 	char	*insert;
 
-	if (!(number = ft_itoa(exit)))
+	number = ft_itoa(exit);
+	if (!number)
 	{
 		put_error(strerror(errno));
 		return ;
@@ -70,7 +71,8 @@ void	execute(char **av, t_minishell *sh, int i)
 {
 	pid_t	pid;
 
-	if (!(av[0] = get_executable(av[0], sh)))
+	av[0] = get_executable(av[0], sh);
+	if (!av[0])
 		return ;
 	pid = fork();
 	if (pid < 0)
