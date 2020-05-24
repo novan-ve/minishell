@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/15 17:11:46 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 02:17:50 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 14:26:19 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		redirect_check(t_minishell *sh, int i, int y)
 {
 	char	*arg;
 	char	*arg_2;
-	
+
 	arg = sh->args[i][y];
 	if (sh->data)
 	{

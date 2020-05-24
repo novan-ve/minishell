@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 13:10:17 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/22 19:45:36 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 13:17:35 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <string.h>
 #include <dirent.h>
 #include <sys/types.h>
-
 
 void			free_path_array(char **path_array)
 {
@@ -59,7 +58,6 @@ int				scan_directory(char *bin, char *arg)
 	DIR					*dir;
 	struct dirent		*dirent;
 
-	
 	if (!(dir = opendir(bin)))
 	{
 		put_error(strerror(errno));

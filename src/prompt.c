@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 15:49:50 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/18 22:25:25 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 14:28:16 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*shorten_dir(char *home, char *path)
 {
 	char	*tmp;
 	char	*dir;
-	
+
 	if (!ft_strncmp(home, path, ft_strlen(home)))
 	{
 		tmp = ft_substr(path, ft_strlen(home), ft_strlen(path));

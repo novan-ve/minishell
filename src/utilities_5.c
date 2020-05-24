@@ -6,12 +6,14 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/18 20:12:43 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 02:17:20 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 14:42:01 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 #include <unistd.h>
+#include <errno.h>
+#include <string.h>
 
 int		is_space(char c)
 {
@@ -30,3 +32,24 @@ void	put_error(char *s)
 	write(2, "\n", 1);
 }
 
+char	*get_identifier(char *reference)
+{
+	int		i;
+	char	*identifier;
+
+	i = 0;
+	while (reference[i] != '\0')
+	{
+		if (reference[i] == '=')
+		{
+			if (!(identifier = ft_substr(reference, 0, i)))
+			{
+				put_error(strerror(errno));
+				return (0);
+			}
+			return (identifier);
+		}
+		i++;
+	}
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/23 16:45:43 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 01:51:28 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 14:29:06 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	free_file_descriptors(t_minishell *sh, int line_count)
 
 int		allocate_file_descriptors(t_minishell *sh)
 {
-	int 	i;
+	int		i;
 
 	i = 0;
 	sh->file_descriptors = (int**)malloc(sizeof(int*) * sh->line_count);

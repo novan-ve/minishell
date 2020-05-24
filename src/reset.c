@@ -6,14 +6,14 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/12 14:10:32 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 01:48:55 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 14:25:29 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 #include <stdlib.h>
 
-void    reset(t_minishell *sh)
+void	reset(t_minishell *sh)
 {
 	if (sh->line)
 		free(sh->line);

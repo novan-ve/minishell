@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/19 00:25:13 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 01:56:06 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 13:21:39 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 #include <sys/wait.h>
 #include <signal.h>
 
-void	signal_catch()
+void	signal_catch(int x)
 {
+	x = x;
 }
 
 void	exit_status(int exit, t_minishell *sh)
@@ -52,10 +53,10 @@ void	waiting(t_minishell *sh)
 	{
 		signal(SIGINT, signal_catch);
 		signal(SIGQUIT, signal_catch);
-		wait(&status);												
+		wait(&status);
 		if (WIFEXITED(status))
-		{					
-			exit = WEXITSTATUS(status);	
+		{
+			exit = WEXITSTATUS(status);
 			if (!exit)
 				env_add("?=0", sh->env);
 			else

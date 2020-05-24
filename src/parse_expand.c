@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 23:45:04 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/23 15:32:43 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 13:49:21 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		expand(int j, char *dst, char *env, t_minishell *sh)
 {
 	int		i;
 	char	*src;
-	
+
 	if (!env)
 	{
 		put_error(strerror(errno));
@@ -42,7 +42,7 @@ int		expand(int j, char *dst, char *env, t_minishell *sh)
 	return (j);
 }
 
-char	*expand_arg(t_minishell *sh, char* dst, char *src)
+char	*expand_arg(t_minishell *sh, char *dst, char *src)
 {
 	int		i;
 	int		j;
