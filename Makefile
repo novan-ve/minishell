@@ -6,7 +6,7 @@
 #    By: abobas <abobas@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/13 15:12:27 by abobas        #+#    #+#                  #
-#    Updated: 2020/05/23 16:47:36 by abobas        ########   odam.nl          #
+#    Updated: 2020/05/24 17:30:12 by novan-ve      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRC = 			minishell.c \
 				utilities_3.c \
 				utilities_4.c \
 				utilities_5.c \
+				utilities_6.c \
 				debug.c
 
 SRC :=			$(SRC:%=$(SRC_DIR)%)
@@ -52,7 +53,7 @@ ADD_LIB = 		-L $(LIB_DIR) -lft
 
 all: $(NAME)
 
-$(NAME): $(LIB) $(SRC) $(HEADER) 
+$(NAME): $(LIB) $(SRC) $(HEADER)
 	gcc $(FLAGS) $(SRC) $(ADD_LIB) -o $(NAME)
 
 %.a:

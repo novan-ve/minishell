@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/15 17:11:46 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 02:17:50 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/25 14:02:12 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		redirect_check(t_minishell *sh, int i, int y)
 {
 	char	*arg;
 	char	*arg_2;
-	
+
 	arg = sh->args[i][y];
 	if (sh->data)
 	{
@@ -73,7 +73,7 @@ int		parse_validate(t_minishell *sh)
 		y = 0;
 		while (y < sh->arg_count[i])
 		{
-			if (!quote_check(sh->args[i][y]))
+			if (!quote_check(sh->args[i][y]) && !sh->data)
 			{
 				put_error("Missing quotes");
 				return (0);

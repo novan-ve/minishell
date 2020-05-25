@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/19 00:25:13 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 13:25:22 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/25 15:23:19 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 #include <sys/wait.h>
 #include <signal.h>
 
-void	signal_catch()
+void	signal_catch(int x)
 {
+	x = x;
 }
 
 void	exit_status(int exit, t_minishell *sh)
@@ -27,7 +28,8 @@ void	exit_status(int exit, t_minishell *sh)
 	char	*number;
 	char	*insert;
 
-	if (!(number = ft_itoa(exit)))
+	number = ft_itoa(exit);
+	if (!number)
 	{
 		put_error(strerror(errno));
 		return ;
@@ -52,10 +54,10 @@ void	waiting(t_minishell *sh)
 	{
 		signal(SIGINT, signal_catch);
 		signal(SIGQUIT, signal_catch);
-		wait(&status);												
+		wait(&status);
 		if (WIFEXITED(status))
-		{					
-			exit = WEXITSTATUS(status);	
+		{
+			exit = WEXITSTATUS(status);
 			if (!exit)
 				env_add("?=0", sh->env);
 			else
@@ -69,7 +71,8 @@ void	execute(char **av, t_minishell *sh)
 {
 	pid_t	pid;
 
-	if (!(av[0] = get_executable(av[0], sh)))
+	av[0] = get_executable(av[0], sh);
+	if (!av[0])
 		return ;
 	pid = fork();
 	if (pid < 0)

@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 14:05:37 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/22 14:51:52 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 17:10:50 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ static char		**allocate_array(char **array, char *str, char c, int count)
 			i++;
 			length++;
 		}
-		if (!(array[j] = (char*)malloc(sizeof(char) * (length + 1))))
+		array[j] = (char*)malloc(sizeof(char) * (length + 1));
+		if (!array[j])
 		{
 			free_array(array, j);
 			return (0);
@@ -94,7 +95,8 @@ static char		**fill_array(char **array, char *str, char c)
 			start = i;
 			while (str[i] != c && str[i] != '\0')
 				i++;
-			if (!(array[j] = ft_substr(str, start, i - start)))
+			array[j] = ft_substr(str, start, i - start);
+			if (!array[j])
 			{
 				free_array(array, j);
 				return (0);
@@ -113,10 +115,12 @@ char			**ft_split(char *str, char c)
 	if (!str)
 		return (0);
 	count = counter(str, c);
-	if (!(array = (char**)malloc(sizeof(char*) * count + 1)))
+	array = (char**)malloc(sizeof(char*) * count + 1);
+	if (!array)
 		return (0);
 	array[count] = 0;
-	if (!(array = allocate_array(array, str, c, count)))
+	array = allocate_array(array, str, c, count);
+	if (!array)
 		return (0);
 	return (fill_array(array, str, c));
 }

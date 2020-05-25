@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/23 15:51:50 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 02:16:13 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 14:20:22 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		parse_output_redirect(t_minishell *sh, int i, int y)
 		close(sh->file_descriptors[i][1]);
 	sh->file_descriptors[i][0] = 1;
 	if (!ft_strcmp(sh->args[i][y], ">>"))
-		fd = open(sh->args[i][y + 1], (O_CREAT | O_WRONLY |O_APPEND), 0666);
+		fd = open(sh->args[i][y + 1], (O_CREAT | O_WRONLY | O_APPEND), 0666);
 	else
 		fd = open(sh->args[i][y + 1], (O_CREAT | O_WRONLY), 0666);
 	if (fd < 0)

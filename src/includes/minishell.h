@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/24 13:26:01 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/25 15:23:57 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 
 # include "../../libft/includes/libft.h"
 
-typedef	struct		s_minishell
+typedef	struct	s_minishell
 {
-	t_vector		*env;
-	char			*line;
-	char			***args;
-	int				**data;
-	int				**file_descriptors;
-	int				line_count;
-	int				*arg_count;
-	int				saved_stdout;
-	int				saved_stdin;
-}					t_minishell;
+	t_vector	*env;
+	char		*line;
+	char		***args;
+	int			**data;
+	int			**file_descriptors;
+	int			line_count;
+	int			*arg_count;
+	int			saved_stdout;
+	int			saved_stdin;
+}				t_minishell;
 
 t_minishell		init_minishell(void);
 t_vector		init_env(char **env);
@@ -61,7 +61,7 @@ int				**allocate_data(int line_count, int *arg_count);
 int				*allocate_counter(int line_count);
 int				allocate_file_descriptors(t_minishell *sh);
 void			free_file_descriptors(t_minishell *sh, int line_count);
-void    		free_array(char ***array, int line_count, int *arg_count);
+void			free_array(char ***array, int line_count, int *arg_count);
 void			free_data(int **data, int line_count);
 int				env_cmp(char *reference, char *data);
 int				vector_search_env(t_vector *v, char *reference);
@@ -76,6 +76,13 @@ int				is_var(char *str);
 int				is_var_char(char c);
 int				is_redirect(char c);
 int				is_env(char *str);
+int				traverse_word(t_minishell *sh, int i);
+int				trav_word_util(t_minishell *sh, int i, int count, int start);
+int				split_sub(t_minishell *sh, int i, int x, int y);
+int				count_args_helper(t_minishell *sh, int i, int y);
+int				array_helper(t_minishell *sh, char ***arr, int i, int x);
+int				sanitize_data(t_minishell *sh, int lc, int *ac);
+int				**fill_data(int **data, t_minishell *sh);
 
 void			debug(t_minishell *sh);
 

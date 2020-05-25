@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 23:45:04 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/23 15:32:43 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 17:18:05 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		expand(int j, char *dst, char *env, t_minishell *sh)
 {
 	int		i;
 	char	*src;
-	
+
 	if (!env)
 	{
 		put_error(strerror(errno));
@@ -42,13 +42,11 @@ int		expand(int j, char *dst, char *env, t_minishell *sh)
 	return (j);
 }
 
-char	*expand_arg(t_minishell *sh, char* dst, char *src)
+char	*expand_arg(t_minishell *sh, char *dst, char *src, int i)
 {
-	int		i;
 	int		j;
 	int		start;
 
-	i = 0;
 	j = 0;
 	while (src[i] != '\0')
 	{
@@ -58,7 +56,8 @@ char	*expand_arg(t_minishell *sh, char* dst, char *src)
 			start = i;
 			while (is_var_char(src[i]))
 				i++;
-			if ((j = expand(j, dst, ft_substr(src, start, i - start), sh)) < 0)
+			j = expand(j, dst, ft_substr(src, start, i - start), sh);
+			if (j < 0)
 				return (0);
 		}
 		else
@@ -75,16 +74,20 @@ char	*expand_var(t_minishell *sh, char *src)
 {
 	char	*dst;
 	int		length;
+	int		i;
 
-	if ((length = expand_length(sh, src)) < 0)
+	length = expand_length(sh, src);
+	if (length < 0)
 		return (0);
-	if (!(dst = (char*)malloc(sizeof(char) * length + 1)))
+	dst = (char*)malloc(sizeof(char) * length + 1);
+	if (!dst)
 	{
 		free(src);
 		put_error(strerror(errno));
 		return (0);
 	}
-	dst = expand_arg(sh, dst, src);
+	i = 0;
+	dst = expand_arg(sh, dst, src, i);
 	free(src);
 	return (dst);
 }
@@ -102,7 +105,8 @@ int		parse_expand_loop(t_minishell *sh)
 		{
 			if (is_var(sh->args[i][j]) > 0 && sh->data[i][j] != 1)
 			{
-				if (!(sh->args[i][j] = expand_var(sh, sh->args[i][j])))
+				sh->args[i][j] = expand_var(sh, sh->args[i][j]);
+				if (!sh->args[i][j])
 					return (0);
 				if (ft_strlen(sh->args[i][j]) == 0 && sh->data[i][j] == 0)
 				{

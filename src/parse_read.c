@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/16 20:29:02 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/19 00:23:16 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/24 14:19:16 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,15 @@
 #include <unistd.h>
 #include <stdio.h>
 
-char	*parse_read_line(int fd, int buf_size)
+char	*parse_read_line(int fd, int buf_size, int i, char *dst)
 {
-	char	*dst;
-	char	byte;
 	int		ret;
-	int		i;
+	char	byte;
 
-	dst = (char*)malloc(sizeof(char) * buf_size);
-	if (!dst)
-		return (0);
-	i = 0;
 	while (1)
 	{
-		if ((ret = read(fd, &byte, 1)) < 0)
+		ret = read(fd, &byte, 1);
+		if (ret < 0)
 			return (0);
 		if (ret == 0)
 			exit(0);
@@ -50,7 +45,17 @@ char	*parse_read_line(int fd, int buf_size)
 
 int		parse_read(t_minishell *sh)
 {
-	sh->line = parse_read_line(0, 128);
+	char	*dst;
+	int		i;
+
+	dst = (char*)malloc(sizeof(char) * 128);
+	if (!dst)
+	{
+		put_error(strerror(errno));
+		return (0);
+	}
+	i = 0;
+	sh->line = parse_read_line(0, 128, i, dst);
 	if (!sh->line)
 	{
 		put_error(strerror(errno));

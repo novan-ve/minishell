@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:50:21 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/24 13:25:53 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/25 15:23:47 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	reset_file_descriptor(t_minishell *sh, int i)
 void	evaluate(t_minishell *sh)
 {
 	int		i;
-	
+
 	i = 0;
 	while (i < sh->line_count)
 	{
@@ -94,4 +94,3 @@ void	evaluate(t_minishell *sh)
 		i++;
 	}
 }
-
