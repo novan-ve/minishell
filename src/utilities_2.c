@@ -5,28 +5,51 @@
 /*                                                     +:+                    */
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/05/17 02:38:51 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/18 02:42:11 by abobas        ########   odam.nl         */
+/*   Created: 2020/05/23 16:45:43 by abobas        #+#    #+#                 */
+/*   Updated: 2020/05/24 14:29:06 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
 
-int		env_cmp(char *reference, char *data)
+void	free_file_descriptors(t_minishell *sh, int line_count)
+{
+	int		y;
+
+	y = 0;
+	while (y < line_count)
+	{
+		if (sh->file_descriptors[y])
+			free(sh->file_descriptors[y]);
+		y++;
+	}
+	free(sh->file_descriptors);
+}
+
+int		allocate_file_descriptors(t_minishell *sh)
 {
 	int		i;
 
 	i = 0;
-	if (!reference || !data)
-		return (1);
-	while (reference[i] != '\0' && data[i] != '\0')
+	sh->file_descriptors = (int**)malloc(sizeof(int*) * sh->line_count);
+	if (!sh->file_descriptors)
+		return (0);
+	while (i < sh->line_count)
 	{
-		if (reference[i] != data[i])
-			return (1);
+		sh->file_descriptors[i] = (int*)malloc(sizeof(int) * 4);
+		if (!sh->file_descriptors[i])
+		{
+			free_file_descriptors(sh, i);
+			return (0);
+		}
+		sh->file_descriptors[i][0] = 0;
+		sh->file_descriptors[i][1] = 0;
+		sh->file_descriptors[i][2] = 0;
+		sh->file_descriptors[i][3] = 0;
 		i++;
 	}
-	if (reference[i] == '\0' && data[i] == '=')
-		return (0);
-	else
-		return (1);
+	return (1);
 }

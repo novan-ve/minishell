@@ -5,43 +5,92 @@
 /*                                                     +:+                    */
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/05/07 15:50:21 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/21 12:45:23 by novan-ve      ########   odam.nl         */
+/*   Created: 2020/05/19 00:25:13 by abobas        #+#    #+#                 */
+/*   Updated: 2020/05/24 17:12:40 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+#include <string.h>
+#include <errno.h>
+#include <unistd.h>
 #include <stdlib.h>
+#include <sys/wait.h>
+#include <signal.h>
 
-void	execute_line(int arg_count, char **args, t_minishell *sh)
+void	signal_catch(int x)
 {
-	if (!ft_strcmp(args[0], "exit"))
-		exit(0);
-	if (!ft_strcmp(args[0], "pwd"))
-		pwd();
-	else if (!ft_strcmp(args[0], "cd"))
-		cd(arg_count, args, sh);
-	else if (!ft_strcmp(args[0], "echo"))
-		echo(arg_count, args);
-	else if (!ft_strcmp(args[0], "env"))
-		vector_print(sh->env);
-	else if (!ft_strcmp(args[0], "export"))
-		export(arg_count, args, sh);
-	else if (!ft_strcmp(args[0], "unset"))
-		unset(arg_count, args, sh);
-	else
-		execute_bin(args, sh);
+	x = x;
 }
 
-void	execute(t_minishell *sh)
+void	exit_status(int exit, t_minishell *sh)
 {
-	int		i;
-	
-	i = 0;
-	while (i < sh->line_count)
+	char	*number;
+	char	*insert;
+
+	number = ft_itoa(exit);
+	if (!number)
 	{
-		execute_line(sh->arg_count[i], sh->args[i], sh);
-		i++;
+		put_error(strerror(errno));
+		return ;
+	}
+	insert = ft_strjoin("?=", number);
+	free(number);
+	if (!insert)
+	{
+		put_error(strerror(errno));
+		return ;
+	}
+	env_add(insert, sh->env);
+	free(insert);
+}
+
+void	waiting(t_minishell *sh)
+{
+	int		status;
+	int		exit;
+
+	while (1)
+	{
+		signal(SIGINT, signal_catch);
+		signal(SIGQUIT, signal_catch);
+		wait(&status);
+		if (WIFEXITED(status))
+		{
+			exit = WEXITSTATUS(status);
+			if (!exit)
+				env_add("?=0", sh->env);
+			else
+				exit_status(exit, sh);
+			return ;
+		}
 	}
 }
 
+void	execute(char **av, t_minishell *sh, int i)
+{
+	pid_t	pid;
+
+	av[0] = get_executable(av[0], sh);
+	if (!av[0])
+		return ;
+	pid = fork();
+	if (pid < 0)
+		put_error(strerror(errno));
+	else if (pid == 0)
+	{
+		if (sh->file_descriptors[i][2])
+		{
+			if ((dup2(sh->file_descriptors[i][3], 0)) < 0)
+				put_error(strerror(errno));
+			close(sh->file_descriptors[i][3]);
+		}
+		if (execve(av[0], av, sh->env->data) < 0)
+		{
+			put_error("Command not found");
+			exit(127);
+		}
+	}
+	else
+		waiting(sh);
+}
