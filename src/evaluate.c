@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:50:21 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/25 15:23:47 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/26 22:04:30 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,28 @@ void	export_command(char *arg, t_minishell *sh)
 
 void	set_file_descriptor(t_minishell *sh, int i)
 {
-	if (sh->file_descriptors[i][0])
+	if (sh->file_descriptor[i][0])
 	{
-		if ((dup2(sh->file_descriptors[i][1], 1)) < 0)
+		if ((dup2(sh->file_descriptor[i][1], 1)) < 0)
 			put_error(strerror(errno));
-		close(sh->file_descriptors[i][1]);
+		close(sh->file_descriptor[i][1]);
 	}
-	if (sh->file_descriptors[i][2])
+	if (sh->file_descriptor[i][2])
 	{
-		if ((dup2(sh->file_descriptors[i][3], 0)) < 0)
+		if ((dup2(sh->file_descriptor[i][3], 0)) < 0)
 			put_error(strerror(errno));
-		close(sh->file_descriptors[i][3]);
+		close(sh->file_descriptor[i][3]);
 	}
 }
 
 void	reset_file_descriptor(t_minishell *sh, int i)
 {
-	if (sh->file_descriptors[i][0])
+	if (sh->file_descriptor[i][0])
 	{
 		if ((dup2(sh->saved_stdout, 1)) < 0)
 			put_error(strerror(errno));
 	}
-	if (sh->file_descriptors[i][2])
+	if (sh->file_descriptor[i][2])
 	{
 		if ((dup2(sh->saved_stdin, 0)) < 0)
 			put_error(strerror(errno));

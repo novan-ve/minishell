@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/26 18:18:41 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/26 22:01:23 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef	struct	s_minishell
 	char		*line;
 	char		***args;
 	int			**data;
-	int			**file_descriptors;
+	int			**file_descriptor;
 	int			line_count;
 	int			*arg_count;
 	int			saved_stdout;
@@ -59,9 +59,9 @@ char			*get_executable(char *arg, t_minishell *sh);
 
 char			***allocate_array(int line_count, int *arg_count);
 int				**allocate_data(int line_count, int *arg_count);
+int				**allocate_file_descriptor(int line_count);
 int				*allocate_counter(int line_count);
-int				allocate_file_descriptors(t_minishell *sh);
-void			free_file_descriptors(t_minishell *sh, int line_count);
+void			free_file_descriptor(int **file_descriptor, int line_count);
 void			free_array(char ***array, int line_count, int *arg_count);
 void			free_data(int **data, int line_count);
 int				env_cmp(char *reference, char *data);

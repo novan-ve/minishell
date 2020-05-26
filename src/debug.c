@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/12 13:41:10 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/26 12:04:59 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/26 22:03:32 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		show_args(t_minishell *sh)
 	}
 }
 
-void		show_filedescriptors(t_minishell *sh)
+void		show_filedescriptor(t_minishell *sh)
 {
 	int		i;
 	int		*tmp;
@@ -40,7 +40,7 @@ void		show_filedescriptors(t_minishell *sh)
 	i = 0;
 	while (i < sh->line_count)
 	{
-		tmp = sh->file_descriptors[i];
+		tmp = sh->file_descriptor[i];
 		ft_printf("file_descriptor[%d][0] = %d\n", i, tmp[0]);
 		ft_printf("file_descriptor[%d][1] = %d\n", i, tmp[1]);
 		ft_printf("file_descriptor[%d][2] = %d\n", i, tmp[2]);
@@ -92,7 +92,7 @@ void		debug(t_minishell *sh)
 		show_args(sh);
 	if (sh->data)
 		show_data(sh);
-	if (sh->file_descriptors)
-		show_filedescriptors(sh);
+	if (sh->file_descriptor)
+		show_filedescriptor(sh);
 	ft_printf("========================================================\n\n");
 }
