@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 02:18:52 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 16:56:29 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/26 12:26:50 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,23 @@
 static int		count_lines(t_minishell *sh)
 {
 	int		i;
+	int		y;
 	int		count;
 
 	count = 0;
 	i = 0;
 	while (i < sh->line_count)
 	{
-		if (sh->arg_count[i] != 0)
-			count++;
+		y = 0;
+		while (y < sh->arg_count[i])
+		{
+			if (sh->args[i][y] != 0)
+			{
+				count++;
+				break ;
+			}
+			y++;
+		}
 		i++;
 	}
 	return (count);

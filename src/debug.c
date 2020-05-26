@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/12 13:41:10 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 12:42:26 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/26 12:04:59 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		show_filedescriptors(t_minishell *sh)
 		ft_printf("file_descriptor[%d][0] = %d\n", i, tmp[0]);
 		ft_printf("file_descriptor[%d][1] = %d\n", i, tmp[1]);
 		ft_printf("file_descriptor[%d][2] = %d\n", i, tmp[2]);
-		ft_printf("file_descriptor[%d][3] = %d\n", i, tmp[3]);
+		ft_printf("file_descriptor[%d][3] = %d\n\n", i, tmp[3]);
 		i++;
 	}
 }

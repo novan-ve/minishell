@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/15 17:11:46 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/25 14:02:12 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/26 14:13:46 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,29 @@ int		redirect_check(t_minishell *sh, int i, int y)
 	arg_2 = sh->args[i][y + 1];
 	if (is_redirect(arg[0]) && is_redirect(arg_2[0]))
 		return (0);
+	if (is_redirect(arg[0]) && is_pipe(arg_2[0]))
+		return (0);
 	if (arg[0] == '>' && ft_strlen(arg) > 2)
 		return (0);
 	if (arg[0] == '>' && arg[1] != '\0' && arg[1] != '>')
 		return (0);
 	if (arg[0] == '<' && ft_strlen(arg) > 1)
+		return (0);
+	return (1);
+}
+
+int		pipe_check(t_minishell *sh, int i, int y)
+{
+	char	*arg;
+	char	*arg_2;
+
+	arg = sh->args[i][y];
+	if (is_pipe(arg[0]) && y + 1 == sh->arg_count[i])
+		return (0);
+	arg_2 = sh->args[i][y + 1];
+	if (is_pipe(arg[0]) && is_redirect(arg_2[0]))
+		return (0);
+	if (is_pipe(arg[0]) && ft_strlen(arg) > 1)
 		return (0);
 	return (1);
 }
@@ -78,7 +96,7 @@ int		parse_validate(t_minishell *sh)
 				put_error("Missing quotes");
 				return (0);
 			}
-			if (!redirect_check(sh, i, y))
+			if (!redirect_check(sh, i, y) || !pipe_check(sh, i, y))
 			{
 				put_error("Syntax error");
 				return (0);
