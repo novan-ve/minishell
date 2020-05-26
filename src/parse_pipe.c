@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/26 15:42:45 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/26 19:35:26 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/26 20:15:26 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,30 +39,26 @@ int		*count_pipe_args(t_minishell *sh, int *arg_count, int i)
 
 	j = 0;
 	y = 0;
-	while (y < i)
-	{
-		arg_count[j] = sh->arg_count[y];
-		j++;
-		y++;
-	}
-	x = 0;
-	arg_count[j] = 0;
-	while (sh->args[y][x] != 0)
-	{
-		if (!ft_strcmp(sh->args[y][x], "|"))
-		{
-			j++;
-			arg_count[j] = 0;
-		}
-		else
-			arg_count[j]++;
-		x++;
-	}
-	y++;
-	j++;
 	while (y < sh->line_count)
 	{
-		arg_count[j] = sh->arg_count[y];
+		if (y != i)
+			arg_count[j] = sh->arg_count[y];
+		else
+		{
+			x = 0;
+			arg_count[j] = 0;
+			while (sh->args[y][x] != 0)
+			{
+				if (!ft_strcmp(sh->args[y][x], "|"))
+				{
+					j++;
+					arg_count[j] = 0;
+				}
+				else
+					arg_count[j]++;
+				x++;
+			}
+		}	
 		j++;
 		y++;
 	}
@@ -106,37 +102,76 @@ char			***fill_pipe_array(t_minishell *sh, int line, int *arg, int i)
 		return (0);
 	y = 0;
 	x = 0;
-	while (y < i)
-	{
-		if (!array_helper(sh, arr, y, x))
-		{
-			put_error(strerror(errno));
-			free_array(arr, line, arg);
-			return (0);
-		}
-		x++;
-		y++;
-	}
-	if (!array_pipe_helper(sh, arr, y, x))
-	{
-		put_error(strerror(errno));
-		free_array(arr, line, arg);
-		return (0);
-	}
-	x = x + count_pipes(sh->args[y]) + 1;
-	y++;
 	while (y < sh->line_count)
 	{
-		if (!array_helper(sh, arr, y, x))
+		if (y != i)
 		{
-			put_error(strerror(errno));
-			free_array(arr, line, arg);
-			return (0);
+			if (!array_helper(sh, arr, y, x))
+			{
+				put_error(strerror(errno));
+				free_array(arr, line, arg);
+				return (0);
+			}
+			x++;
 		}
-		x++;
+		else
+		{
+			if (!array_pipe_helper(sh, arr, y, x))
+			{
+				put_error(strerror(errno));
+				free_array(arr, line, arg);
+				return (0);
+			}
+			x = x + count_pipes(sh->args[y]) + 1;	
+		}
 		y++;
 	}
 	return (arr);
+}
+
+int				**fill_pipe_data(int **data, t_minishell *sh, int a)
+{
+	int		i;
+	int		y;
+	int		x;
+	int		z;
+
+	i = 0;
+	x = 0;
+	while (i < sh->line_count)
+	{
+		y = 0;
+		z = 0;
+		if (i != a)
+		{
+			while (y < sh->arg_count[i])
+			{
+				data[x][z] = sh->data[i][y];
+				z++;
+				y++;
+			}
+		}
+		else
+		{
+			while (y < sh->arg_count[i])
+			{
+				if (!ft_strcmp(sh->args[i][y], "|"))
+				{
+					x++;
+					z = 0;
+				}
+				else
+				{
+					data[x][z] = sh->data[i][y];
+					z++;
+				}
+				y++;
+			}
+		}
+		x++;
+		i++;
+	}	
+	return (data);
 }
 
 int		split_pipe_commands(t_minishell *sh, int i)
@@ -144,6 +179,7 @@ int		split_pipe_commands(t_minishell *sh, int i)
 	char		***array;
 	int			*arg_count;
 	int			line_count;
+	int			**data;
 
 	line_count = sh->line_count + count_pipes(sh->args[i]);
 	arg_count = allocate_counter(line_count);
@@ -153,9 +189,15 @@ int		split_pipe_commands(t_minishell *sh, int i)
 	array = fill_pipe_array(sh, line_count, arg_count, i);
 	if (!array)
 		return (0);
+	data = allocate_data(line_count, arg_count);
+	if (!data)
+		return (0);
+	data = fill_pipe_data(data, sh, i);
+	free_data(sh->data, sh->line_count);
 	free_array(sh->args, sh->line_count, sh->arg_count);
 	free(sh->arg_count);
 	sh->args = array;
+	sh->data = data;
 	sh->line_count = line_count;
 	sh->arg_count = arg_count;
 	return (1);
@@ -199,8 +241,6 @@ int		split_pipes(t_minishell *sh)
 
 int		parse_pipe(t_minishell *sh)
 {
-	free_data(sh->data, sh->line_count);
-	sh->data = 0;
 	if (!split_pipes(sh))
 		return (0);
 	return (1);
