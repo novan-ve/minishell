@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/26 15:42:45 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 00:34:29 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 00:43:53 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char	***split_pipe_2(t_minishell *sh, int line, int *arg, int i)
 	{
 		put_error(strerror(errno));
 		free_array(array, line, arg);
+		free(arg);
 		return (0);
 	}
 	return (array);
