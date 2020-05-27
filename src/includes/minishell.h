@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/27 14:36:12 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 00:28:33 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,12 @@ int				split_sub(t_minishell *sh, int i, int x, int y);
 int				count_args_helper(t_minishell *sh, int i, int y);
 int				array_helper(t_minishell *sh, char ***arr, int i, int x);
 int				sanitize_data(t_minishell *sh, int lc, int *ac);
+char			***fill_pipe_array(t_minishell *sh, char ***arr, int i);
 int				**fill_data(int **data, t_minishell *sh);
+int				**fill_pipe_data_1(int **data, t_minishell *sh, int a);
+int				**fill_pipe_file_descriptor(int **file_descriptor, \
+				t_minishell *sh, int i);
+int				*count_pipe_args_1(t_minishell *sh, int *arg_count, int i);
 int				expand_length(t_minishell *sh, char *src);
 int				count_pipes(char **arg);
 int				check_pipes(char **arg);
