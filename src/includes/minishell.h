@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/26 22:01:23 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/27 14:36:12 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,16 @@ int				env_cmp(char *reference, char *data);
 int				vector_search_env(t_vector *v, char *reference);
 char			*get_env(t_minishell *sh, char *env);
 char			*get_identifier(char *reference);
+int				traverse_word(t_minishell *sh, int i);
+int				trav_word_util(t_minishell *sh, int i, int count, int start);
+int				split_sub(t_minishell *sh, int i, int x, int y);
+int				count_args_helper(t_minishell *sh, int i, int y);
+int				array_helper(t_minishell *sh, char ***arr, int i, int x);
+int				sanitize_data(t_minishell *sh, int lc, int *ac);
+int				**fill_data(int **data, t_minishell *sh);
 int				expand_length(t_minishell *sh, char *src);
+int				count_pipes(char **arg);
+int				check_pipes(char **arg);
 void			put_error(char *s);
 int				is_space(char c);
 int				is_double_quote(char *str);
@@ -78,13 +87,6 @@ int				is_var_char(char c);
 int				is_redirect(char c);
 int				is_pipe(char c);
 int				is_env(char *str);
-int				traverse_word(t_minishell *sh, int i);
-int				trav_word_util(t_minishell *sh, int i, int count, int start);
-int				split_sub(t_minishell *sh, int i, int x, int y);
-int				count_args_helper(t_minishell *sh, int i, int y);
-int				array_helper(t_minishell *sh, char ***arr, int i, int x);
-int				sanitize_data(t_minishell *sh, int lc, int *ac);
-int				**fill_data(int **data, t_minishell *sh);
 
 void			debug(t_minishell *sh);
 

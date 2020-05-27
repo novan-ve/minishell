@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/26 15:42:45 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/26 22:33:30 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/27 15:12:34 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,6 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-int		count_pipes(char **arg)
-{
-	int		count;
-	int		i;
-
-	count = 0;
-	i = 0;
-	while (arg[i] != 0)
-	{
-		if (!ft_strcmp(arg[i], "|"))
-			count ++;
-		i++;
-	}
-	return (count);	
-}
 
 int		*count_pipe_args(t_minishell *sh, int *arg_count, int i)
 {
@@ -227,6 +211,7 @@ int		**fill_pipe_file_descriptor(int **file_descriptor, t_minishell *sh, int i)
 			x = pipe_file_descriptor(file_descriptor, sh, i, x);
 			if (x < 0)
 				return (0);
+			y = y + count_pipes(sh->args[i]);
 		}
 		y++;
 	}
@@ -271,19 +256,6 @@ int		split_pipe_commands(t_minishell *sh, int i)
 	return (1);
 }
 
-int		check_pipes(char **arg)
-{
-	int		i;
-	
-	i = 0;
-	while (arg[i] != 0)
-	{
-		if (!ft_strcmp(arg[i], "|"))
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 int		split_pipes(t_minishell *sh)
 {
@@ -298,6 +270,7 @@ int		split_pipes(t_minishell *sh)
 				return (0);
 			else
 			{
+				debug(sh);
 				i = 0;
 				continue ;
 			}

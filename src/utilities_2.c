@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/23 16:45:43 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/26 22:04:06 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/27 15:15:41 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,34 @@ int		**allocate_file_descriptor(int line_count)
 		i++;
 	}
 	return (file_descriptor);
+}
+
+int		count_pipes(char **arg)
+{
+	int		count;
+	int		i;
+
+	count = 0;
+	i = 0;
+	while (arg[i] != 0)
+	{
+		if (!ft_strcmp(arg[i], "|"))
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+int		check_pipes(char **arg)
+{
+	int		i;
+
+	i = 0;
+	while (arg[i] != 0)
+	{
+		if (!ft_strcmp(arg[i], "|"))
+			return (1);
+		i++;
+	}
+	return (0);
 }
