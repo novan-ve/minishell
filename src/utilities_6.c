@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   utilities_6.c                                      :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: novan-ve <novan-ve@student.codam.nl>         +#+                     */
+/*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/24 16:19:41 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/24 16:55:47 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/26 14:07:31 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int		trav_word_util(t_minishell *sh, int i, int count, int start)
 {
 	if (is_redirect(sh->line[i]) && i > start && !(count % 2))
 		return (i);
-	if (is_redirect(sh->line[i]) && !is_redirect(sh->line[i + 1]))
+	if ((is_redirect(sh->line[i]) && !is_redirect(sh->line[i + 1])) || \
+	sh->line[i] == '|')
 	{
 		if (!(count % 2))
 			return (i + 1);
