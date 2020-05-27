@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/26 15:42:45 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/27 15:12:34 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/27 15:22:10 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,7 +270,6 @@ int		split_pipes(t_minishell *sh)
 				return (0);
 			else
 			{
-				debug(sh);
 				i = 0;
 				continue ;
 			}
