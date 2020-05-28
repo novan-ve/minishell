@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 13:10:17 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 22:55:44 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 23:05:01 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char			*find_executable(char *arg, char **path_array)
 	{
 		if (scan_directory(path_array[i], arg))
 		{
-			arg = make_executable(path_array[i], arg);
+			//arg = make_executable(path_array[i], arg);
 			break ;
 		}
 		i++;
