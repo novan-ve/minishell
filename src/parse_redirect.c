@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/23 15:51:50 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 20:14:28 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 20:23:08 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 int		parse_output_redirect(t_minishell *sh, int i, int y)
 {
@@ -33,7 +34,9 @@ int		parse_output_redirect(t_minishell *sh, int i, int y)
 		return (0);
 	}
 	sh->file_descriptor[i][1] = fd;
+	free(sh->args[i][y]);
 	sh->args[i][y] = 0;
+	free(sh->args[i][y + 1]);
 	sh->args[i][y + 1] = 0;
 	return (1);
 }
@@ -52,7 +55,9 @@ int		parse_input_redirect(t_minishell *sh, int i, int y)
 		return (0);
 	}
 	sh->file_descriptor[i][3] = fd;
+	free(sh->args[i][y]);
 	sh->args[i][y] = 0;
+	free(sh->args[i][y + 1]);
 	sh->args[i][y + 1] = 0;
 	return (1);
 }
