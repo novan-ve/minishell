@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/19 00:25:13 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 23:23:56 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 23:25:02 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ void	execute(char **av, t_minishell *sh)
 
 	av[0] = get_executable(av[0], sh);
 	while (1)
+	{
+		pid = pid;
+	}
 	return ;
 	if (!av[0])
 		return ;
