@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/19 00:25:13 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 23:31:06 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 23:37:42 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,11 @@ void	execute(char **av, t_minishell *sh)
 	pid_t	pid;
 
 	//av[0] = get_executable(av[0], sh);
-	if (!av[0])
-		return ;
+	//if (!av[0])
+	//	return ;
+	free(av[0]);
+	av[0] = ft_strdup("/bin/ls");
+	//ft_printf("%s\n", av[0]);
 	pid = fork();
 	if (pid < 0)
 		put_error(strerror(errno));
