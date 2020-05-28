@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 13:10:17 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 22:09:19 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 22:11:43 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int				scan_directory(char *bin, char *arg)
 	if (errno > 0)
 		put_error(strerror(errno));
 	closedir(dir);
+	free(dirent);
 	return (0);
 }
 
@@ -91,7 +92,7 @@ char			*find_executable(char *arg, char **path_array)
 	{
 		if (scan_directory(path_array[i], arg))
 		{
-			// arg = make_executable(path_array[i], arg);
+			arg = make_executable(path_array[i], arg);
 			break ;
 		}
 		i++;
