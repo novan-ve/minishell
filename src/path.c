@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 13:10:17 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 23:09:38 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 23:11:03 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,8 @@ char			*find_executable(char *arg, char **path_array)
 	int		i;
 
 	i = 0;
-	while (path_array[i] != 0)
+	while (path_array[i] != 0 && path_array[i] == 0)
 	{
-		break ;
 		if (scan_directory(path_array[i], arg))
 		{
 			arg = make_executable(path_array[i], arg);
