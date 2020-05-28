@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/16 20:29:02 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 18:24:43 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 19:25:59 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ char	*parse_read_line(int fd, int buf_size, int i, char *dst)
 	{
 		ret = read(fd, &byte, 1);
 		if (ret < 0)
+		{
+			free(dst);
 			return (0);
+		}
 		if (ret == 0)
 			exit(0);
 		dst[i] = (byte == '\n' || byte == '\0') ? '\0' : byte;
