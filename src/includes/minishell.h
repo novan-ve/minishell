@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/28 19:19:20 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 19:37:52 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef	struct	s_minishell
 	int			saved_stdout;
 	int			saved_stdin;
 }				t_minishell;
+
+char			*g_prompt;
 
 t_minishell		init_minishell(void);
 t_vector		init_env(char **env);

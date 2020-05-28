@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/12 14:10:32 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 18:25:25 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 19:44:20 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,7 @@ void	reset(t_minishell *sh)
 		free_file_descriptor(sh->file_descriptor, sh->line_count);
 	sh->file_descriptor = 0;
 	sh->line_count = 0;
+	if (g_prompt)
+		free(g_prompt);
+	g_prompt = 0;
 }

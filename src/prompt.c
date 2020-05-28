@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 15:49:50 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 17:27:36 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/28 19:57:43 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,55 @@ char	*get_dir(t_minishell *sh)
 	return (shorten_dir(home, path));
 }
 
+char	*save_prompt(char *user, char *dir)
+{
+	int		j;
+	int		i;
+
+	i = 0;
+	j = 0;
+	while (j < ft_strlen(user))
+	{
+		g_prompt[i] = user[j];
+		i++;
+		j++;
+	}
+	g_prompt[i] = ':';
+	i++;
+	j = 0;
+	while (j < ft_strlen(dir))
+	{
+		g_prompt[i] = dir[j];
+		i++;
+		j++;
+	}
+	g_prompt[i] = '$';
+	g_prompt[i + 1] = ' ';
+	g_prompt[i + 2] = '\0';
+	return (g_prompt);
+}
+
 int		prompt(t_minishell *sh)
 {
 	char	*dir;
 	char	*user;
 	char	ret;
+	int		length;
 
 	ret = 0;
 	user = get_env(sh, "USER");
 	dir = get_dir(sh);
 	if (user && dir)
 	{
-		ft_printf("%s:%s$ ", user, dir);
-		ret = 1;
+		length = ft_strlen(user) + ft_strlen(dir) + 3;
+		g_prompt = (char*)malloc(sizeof(char) * length + 1);
+		if (!g_prompt)
+			put_error(strerror(errno));
+		else
+		{
+			ft_printf("%s", save_prompt(user, dir));
+			ret = 1;
+		}
 	}
 	if (dir)
 		free(dir);

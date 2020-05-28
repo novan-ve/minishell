@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/28 15:37:31 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 19:19:27 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 19:37:30 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 void	signal_catch(int signal)
 {
-	signal = signal;
+	if (signal == SIGINT)
+		ft_printf("\n%s", g_prompt);
 }
 
 void	signal_handler(void)
