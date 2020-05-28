@@ -6,11 +6,12 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/16 17:04:31 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/26 18:54:57 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 19:01:38 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+#include <signal.h>
 
 void	minishell(t_minishell *sh)
 {
@@ -30,6 +31,7 @@ int		main(int ac, char **av, char **env)
 	t_minishell		sh;
 	t_vector		v;
 
+	signal_handler();
 	v = init_env(env);
 	sh = init_minishell();
 	sh.env = &v;

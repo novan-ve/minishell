@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/16 20:29:02 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 14:19:16 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/28 18:24:43 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <stdio.h>
 
 char	*parse_read_line(int fd, int buf_size, int i, char *dst)
 {

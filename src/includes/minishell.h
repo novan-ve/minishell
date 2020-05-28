@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/28 12:41:26 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/28 19:19:20 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_vector		init_env(char **env);
 
 void			reset(t_minishell *sh);
 int				prompt(t_minishell *sh);
+void			signal_handler(void);
 int				parse(t_minishell *sh);
 int				parse_read(t_minishell *sh);
 int				parse_split(t_minishell *sh);

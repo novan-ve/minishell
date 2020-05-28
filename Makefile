@@ -6,7 +6,7 @@
 #    By: abobas <abobas@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/13 15:12:27 by abobas        #+#    #+#                  #
-#    Updated: 2020/05/28 12:44:24 by novan-ve      ########   odam.nl          #
+#    Updated: 2020/05/28 16:05:04 by abobas        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC = 			minishell.c \
 				initialization.c \
 				environment.c \
 				prompt.c \
+				signals.c \
 				reset.c \
 				parse.c \
 				parse_read.c \

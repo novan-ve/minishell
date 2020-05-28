@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/19 00:25:13 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/25 15:23:19 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 15:34:33 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/wait.h>
-#include <signal.h>
-
-void	signal_catch(int x)
-{
-	x = x;
-}
 
 void	exit_status(int exit, t_minishell *sh)
 {
@@ -52,8 +46,6 @@ void	waiting(t_minishell *sh)
 
 	while (1)
 	{
-		signal(SIGINT, signal_catch);
-		signal(SIGQUIT, signal_catch);
 		wait(&status);
 		if (WIFEXITED(status))
 		{

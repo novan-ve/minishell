@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse.c                                            :+:    :+:            */
+/*   signals.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/05/14 16:16:35 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 18:56:27 by abobas        ########   odam.nl         */
+/*   Created: 2020/05/28 15:37:31 by abobas        #+#    #+#                 */
+/*   Updated: 2020/05/28 19:19:27 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+#include <signal.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
 
-int		parse(t_minishell *sh)
+void	signal_catch(int signal)
 {
-	if (!parse_read(sh))
-		return (0);
-	if (!parse_split(sh))
-		return (0);
-	if (!parse_validate(sh))
-		return (0);
-	if (!parse_quotes(sh))
-		return (0);
-	if (!parse_expand(sh))
-		return (0);
-	if (!parse_validate(sh))
-		return (0);
-	if (!parse_pipe(sh))
-		return (0);
-	if (!parse_redirect(sh))
-		return (0);
-	return (1);
+	signal = signal;
+}
+
+void	signal_handler(void)
+{
+	if (signal(SIGINT, signal_catch) == SIG_ERR)
+	{
+		put_error(strerror(errno));
+		exit(1);
+	}
+	if (signal(SIGQUIT, signal_catch) == SIG_ERR)
+	{
+		put_error(strerror(errno));
+		exit(1);
+	}
 }
