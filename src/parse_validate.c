@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/15 17:11:46 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/25 14:02:12 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/27 13:42:09 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int		quote_check(char *arg)
 		}
 		else if (arg[i] == quote)
 			count++;
+		if (count == 2)
+			quote = 0;
 		i++;
 	}
 	if (count % 2)

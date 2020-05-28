@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/18 20:12:43 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/24 17:29:49 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/27 12:18:18 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,20 @@ char	*get_identifier(char *reference)
 		i++;
 	}
 	return (0);
+}
+
+int		parse_quote_count(char *s, int data)
+{
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (s[i])
+	{
+		if (s[i] == '"' || (s[i] == '\'' && data != 2))
+			count++;
+		i++;
+	}
+	return (count);
 }
