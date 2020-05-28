@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 13:10:17 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 23:14:04 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 23:16:16 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ char			*get_executable(char *arg, t_minishell *sh)
 		put_error(strerror(errno));
 		return (arg);
 	}
-	return (find_executable(arg, path_array));
+	return (arg);
+	//return (find_executable(arg, path_array));
 }
