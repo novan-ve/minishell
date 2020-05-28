@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 13:10:17 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 22:11:43 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 22:42:38 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,9 @@ char			*make_executable(char *bin, char *arg)
 	return (new_executable);
 }
 
-int				scan_directory(char *bin, char *arg)
+int				scan_directory(char *bin, char *arg, t_minishell *sh)
 {
 	DIR					*dir;
-	struct dirent		*dirent;
 
 	dir = opendir(bin);
 	if (!dir)
@@ -66,31 +65,30 @@ int				scan_directory(char *bin, char *arg)
 		return (0);
 	}
 	errno = 0;
-	dirent = readdir(dir);
-	while (dirent != 0)
+	sh->dirent = readdir(dir);
+	while (sh->dirent != 0)
 	{
-		if (!ft_strcmp(dirent->d_name, arg))
+		if (!ft_strcmp(sh->dirent->d_name, arg))
 		{
 			closedir(dir);
 			return (1);
 		}
-		dirent = readdir(dir);
+		sh->dirent = readdir(dir);
 	}
 	if (errno > 0)
 		put_error(strerror(errno));
 	closedir(dir);
-	free(dirent);
 	return (0);
 }
 
-char			*find_executable(char *arg, char **path_array)
+char			*find_executable(char *arg, char **path_array, t_minishell *sh)
 {
 	int		i;
 
 	i = 0;
 	while (path_array[i] != 0)
 	{
-		if (scan_directory(path_array[i], arg))
+		if (scan_directory(path_array[i], arg, sh))
 		{
 			arg = make_executable(path_array[i], arg);
 			break ;
@@ -116,5 +114,5 @@ char			*get_executable(char *arg, t_minishell *sh)
 		put_error(strerror(errno));
 		return (arg);
 	}
-	return (find_executable(arg, path_array));
+	return (find_executable(arg, path_array, sh));
 }

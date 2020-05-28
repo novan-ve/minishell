@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 03:49:40 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 18:31:06 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 22:42:14 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_minishell	init_minishell(void)
 	sh.file_descriptor = 0;
 	sh.line_count = 0;
 	sh.arg_count = 0;
+	sh.dirent = 0;
 	sh.saved_stdin = dup(0);
 	if (sh.saved_stdin < 0)
 	{
