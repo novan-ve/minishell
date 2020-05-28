@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 23:45:04 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/26 12:20:21 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/28 12:42:02 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,83 +14,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-
-int		expand(int j, char *dst, char *env, t_minishell *sh)
-{
-	int		i;
-	char	*src;
-
-	if (!env)
-	{
-		put_error(strerror(errno));
-		free(dst);
-		return (-1);
-	}
-	src = get_env(sh, env);
-	free(env);
-	if (src)
-	{
-		i = 0;
-		while (src[i] != '\0')
-		{
-			dst[j] = src[i];
-			j++;
-			i++;
-		}
-		free(src);
-	}
-	return (j);
-}
-
-char	*expand_arg(t_minishell *sh, char *dst, char *src, int i)
-{
-	int		j;
-	int		start;
-
-	j = 0;
-	while (src[i] != '\0')
-	{
-		i++;
-		if (src[i - 1] == '$' && is_var_char(src[i]))
-		{
-			start = i;
-			while (is_var_char(src[i]))
-				i++;
-			j = expand(j, dst, ft_substr(src, start, i - start), sh);
-			if (j < 0)
-				return (0);
-		}
-		else
-		{
-			dst[j] = src[i - 1];
-			j++;
-		}
-	}
-	dst[j] = '\0';
-	return (dst);
-}
-
-char	*expand_var(t_minishell *sh, char *src)
-{
-	char	*dst;
-	int		length;
-	int		i;
-
-	length = expand_length(sh, src);
-	if (length < 0)
-		return (0);
-	dst = (char*)malloc(sizeof(char) * length + 1);
-	if (!dst)
-	{
-		free(src);
-		put_error(strerror(errno));
-		return (0);
-	}
-	i = 0;
-	dst = expand_arg(sh, dst, src, i);
-	free(src);
-	return (dst);
-}
 
 int		parse_expand_loop(t_minishell *sh)
 {
@@ -121,11 +44,87 @@ int		parse_expand_loop(t_minishell *sh)
 	return (1);
 }
 
+void	parse_quote_rmpcpy(t_minishell *sh, int i, int j, char *tmp)
+{
+	int		c;
+	int		d;
+
+	c = 0;
+	d = 0;
+	while (tmp[c])
+	{
+		if (tmp[c] == '"' && sh->data[i][j] == 1)
+		{
+			sh->args[i][j][d] = tmp[c];
+			d++;
+		}
+		if (!(tmp[c] == '$' && (tmp[c + 1] == '"' || tmp[c + 1] == '\'')))
+			if (tmp[c] != '"' && tmp[c] != '\'')
+			{
+				sh->args[i][j][d] = tmp[c];
+				d++;
+			}
+		c++;
+	}
+	sh->args[i][j][d] = '\0';
+	free(tmp);
+}
+
+int		parse_quote_new(t_minishell *sh, int i, int j)
+{
+	char	*tmp;
+	int		len;
+
+	tmp = ft_strdup(sh->args[i][j]);
+	if (!tmp)
+	{
+		put_error(strerror(errno));
+		return (0);
+	}
+	free(sh->args[i][j]);
+	len = ft_strlen(tmp) - parse_quote_count(sh->args[i][j], sh->data[i][j]);
+	sh->args[i][j] = (char*)malloc(sizeof(char) * len + 1);
+	if (!sh->args[i][j])
+	{
+		free(tmp);
+		put_error(strerror(errno));
+		return (0);
+	}
+	parse_quote_rmpcpy(sh, i, j, tmp);
+	return (1);
+}
+
+int		parse_quote_rm(t_minishell *sh)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < sh->line_count)
+	{
+		j = 0;
+		while (j < sh->arg_count[i])
+		{
+			if (parse_quote_count(sh->args[i][j], sh->data[i][j]))
+				if (!parse_quote_new(sh, i, j))
+				{
+					put_error(strerror(errno));
+					return (0);
+				}
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 int		parse_expand(t_minishell *sh)
 {
 	if (!parse_expand_loop(sh))
 		return (0);
 	if (!parse_sanitize(sh))
+		return (0);
+	if (!parse_quote_rm(sh))
 		return (0);
 	return (1);
 }
