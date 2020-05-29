@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 00:53:59 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/29 15:32:23 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 17:58:50 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	export(int ac, char **av, t_minishell *sh)
 	{
 		while (i < ac)
 		{
-			if (is_env(av[i]))
+			if (is_env(av[i]) == 1)
 			{
 				identifier = get_identifier(av[i]);
 				strcmp("?", identifier) == 0 ? \
@@ -42,7 +42,7 @@ void	export(int ac, char **av, t_minishell *sh)
 				if (identifier)
 					free(identifier);
 			}
-			else
+			else if (is_env(av[i]) == -1)
 				put_error("Not a valid identifier");
 			i++;
 		}

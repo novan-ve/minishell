@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 02:38:51 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 12:43:08 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/29 17:59:24 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int		is_env(char *str)
 	{
 		if (str[i] == '=')
 			return (1);
+		if (ft_isdigit(str[i]))
+			return (-1);
 		i++;
 	}
 	return (0);
