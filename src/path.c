@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 13:10:17 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/29 11:55:42 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 11:57:25 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,6 @@ char			*find_executable(char *arg, char **path_array)
 	i = 0;
 	while (path_array[i] != 0)
 	{
-		while (1)
-		{
-			errno = 0;
-		}
 		if (scan_directory(path_array[i], arg))
 		{
 			arg = make_executable(path_array[i], arg);
@@ -118,6 +114,10 @@ char			*get_executable(char *arg, t_minishell *sh)
 	{
 		put_error(strerror(errno));
 		return (arg);
+	}
+	while (1)
+	{
+		errno = 0;
 	}
 	return (find_executable(arg, path_array));
 }
