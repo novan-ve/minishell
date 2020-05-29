@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 14:05:37 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/29 12:14:14 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 12:16:19 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,10 @@ static char		**fill_array(char **array, char *str, char c)
 			while (str[i] != c && str[i] != '\0')
 				i++;
 			array[j] = ft_substr(str, start, i - start);
+			while (1)
+			{
+				count = 1;
+			}
 			if (!array[j])
 			{
 				free_array(array, j);
@@ -123,9 +127,5 @@ char			**ft_split(char *str, char c)
 	if (!array)
 		return (0);
 	array = fill_array(array, str, c);
-	while (1)
-	{
-		count = 1;
-	}
 	return (array);
 }
