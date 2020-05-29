@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 13:10:17 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/29 11:57:25 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 11:58:38 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,10 @@ char			*get_executable(char *arg, t_minishell *sh)
 	char		*path;
 	char		**path_array;
 
+	while (1)
+	{
+		errno = 0;
+	}
 	path = get_env(sh, "PATH");
 	if (!path)
 		return (arg);
@@ -114,10 +118,6 @@ char			*get_executable(char *arg, t_minishell *sh)
 	{
 		put_error(strerror(errno));
 		return (arg);
-	}
-	while (1)
-	{
-		errno = 0;
 	}
 	return (find_executable(arg, path_array));
 }
