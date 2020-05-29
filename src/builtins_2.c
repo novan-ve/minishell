@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/29 16:55:24 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/29 17:26:53 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 17:30:24 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int		cd_3(t_minishell *sh)
 	if (!old)
 		return (0);
 	insert = ft_strjoin("OLDPWD=", old);
+	free(old);
 	if (!insert)
 	{
-		free(old);
 		put_error(strerror(errno));
 		return (0);
 	}
