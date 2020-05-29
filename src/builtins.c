@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:44:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/29 15:28:04 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 16:21:38 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 void	echo(int ac, char **av, t_minishell *sh)
 {
@@ -85,4 +86,33 @@ void	pwd(t_minishell *sh)
 		ft_printf("%s\n", (path));
 		env_add("?=0", sh->env);
 	}
+}
+
+void	ft_exit(int arg_count, char **args, t_minishell *sh)
+{
+	int		i;
+	int		ret;
+
+	ft_printf("exit\n");
+	if (arg_count == 1)
+		exit(0);
+	i = 0;
+	while (args[1][i])
+	{
+		if (ft_isalpha(args[1][i]) && !(args[1][i] == '-' && i == 0))
+		{
+			ft_printf("Minishell: ");
+			ft_printf("exit: %s: numeric argument required\n", args[1]);
+			exit(2);
+		}
+		if (!(args[1][i] == '-' && i == 0))
+			ret = ret * 10 + args[1][i] - 48;
+		i++;
+	}
+	if (args[1][0] == '-' && (int)(ret / 256) % 2 && arg_count < 3)
+		exit(256 - ret % 256);
+	if (arg_count < 3)
+		exit(ret % 256);
+	put_error("exit: too many arguments");
+	env_add("?=1", sh->env);
 }
