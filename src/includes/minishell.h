@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/28 22:47:55 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 15:12:24 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void			evaluate(t_minishell *sh);
 void			pwd(t_minishell *sh);
 void			echo(int ac, char **av, t_minishell *sh);
 void			cd(int ac, char **av, t_minishell *sh);
+void			quit(int ac, char **av);
 
 void			env_add(char *reference, t_vector *v);
 void			env_delete(char *reference, t_vector *v);
