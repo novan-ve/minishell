@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 13:10:17 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/29 11:54:08 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 11:55:42 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,6 @@ int				scan_directory(char *bin, char *arg)
 	DIR					*dir;
 	struct dirent		*dirent;
 
-	while (1)
-	{
-		errno = 0;
-	}
 	dir = opendir(bin);
 	if (!dir)
 	{
@@ -93,6 +89,10 @@ char			*find_executable(char *arg, char **path_array)
 	i = 0;
 	while (path_array[i] != 0)
 	{
+		while (1)
+		{
+			errno = 0;
+		}
 		if (scan_directory(path_array[i], arg))
 		{
 			arg = make_executable(path_array[i], arg);
