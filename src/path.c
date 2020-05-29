@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 13:10:17 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/29 12:01:24 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 12:03:22 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,6 @@ char			*get_executable(char *arg, t_minishell *sh)
 	if (!path)
 		return (arg);
 	path_array = ft_split(path, ':');
-	while (1)
-	{
-		errno = 0;
-	}
 	free(path);
 	if (!path_array)
 	{

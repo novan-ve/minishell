@@ -6,14 +6,14 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 14:05:37 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 22:01:03 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 12:05:03 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 #include <stdlib.h>
 
-static void		free_array(char **array, int j)
+void	free_array(char **array, int j)
 {
 	j--;
 	while (j >= 0)
@@ -25,7 +25,7 @@ static void		free_array(char **array, int j)
 	free(array);
 }
 
-static int		counter(char *str, char c)
+int		counter(char *str, char c)
 {
 	int i;
 	int count;
@@ -49,7 +49,7 @@ static int		counter(char *str, char c)
 	return (count);
 }
 
-static char		**allocate_array(char **array, char *str, char c, int count)
+char	**allocate_array(char **array, char *str, char c, int count)
 {
 	int	j;
 	int	i;
@@ -78,7 +78,7 @@ static char		**allocate_array(char **array, char *str, char c, int count)
 	return (array);
 }
 
-static char		**fill_array(char **array, char *str, char c)
+char	**fill_array(char **array, char *str, char c)
 {
 	int	i;
 	int	j;
@@ -107,7 +107,7 @@ static char		**fill_array(char **array, char *str, char c)
 	return (array);
 }
 
-char			**ft_split(char *str, char c)
+char	**ft_split(char *str, char c)
 {
 	char	**array;
 	int		count;
