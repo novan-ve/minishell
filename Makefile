@@ -6,7 +6,7 @@
 #    By: abobas <abobas@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/13 15:12:27 by abobas        #+#    #+#                  #
-#    Updated: 2020/05/29 15:53:28 by abobas        ########   odam.nl          #
+#    Updated: 2020/05/29 17:05:02 by abobas        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRC = 			minishell.c \
 				evaluate.c \
 				execute.c \
 				path.c \
-				builtins.c \
+				builtins_1.c \
+				builtins_2.c \
 				utilities_1.c \
 				utilities_2.c \
 				utilities_3.c \

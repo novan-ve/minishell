@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/29 16:20:10 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/29 17:07:44 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int				parse_redirect(t_minishell *sh);
 void			evaluate(t_minishell *sh);
 void			pwd(t_minishell *sh);
 void			echo(int ac, char **av, t_minishell *sh);
-void			cd(int ac, char **av, t_minishell *sh);
+void			cd_1(int ac, char **av, t_minishell *sh);
 void			quit(int ac, char **av);
 void			ft_exit(int arg_count, char **args, t_minishell *sh);
 

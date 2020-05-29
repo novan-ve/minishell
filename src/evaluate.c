@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:50:21 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/29 16:20:52 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/29 17:08:10 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	evaluate_commands(int arg_count, char **args, t_minishell *sh)
 	else if (!ft_strcmp(args[0], "pwd"))
 		pwd(sh);
 	else if (!ft_strcmp(args[0], "cd"))
-		cd(arg_count, args, sh);
+		cd_1(arg_count, args, sh);
 	else if (!ft_strcmp(args[0], "echo"))
 		echo(arg_count, args, sh);
 	else if (!ft_strcmp(args[0], "env"))

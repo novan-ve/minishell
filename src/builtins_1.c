@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   builtins.c                                         :+:    :+:            */
+/*   builtins_1.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:44:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/29 16:21:38 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/29 17:07:08 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 #include <string.h>
 #include <errno.h>
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 void	echo(int ac, char **av, t_minishell *sh)
 {
@@ -41,35 +41,6 @@ void	echo(int ac, char **av, t_minishell *sh)
 	if (newline == 1)
 		ft_printf("\n");
 	env_add("?=0", sh->env);
-}
-
-void	cd(int ac, char **av, t_minishell *sh)
-{
-	int		exit;
-
-	exit = 0;
-	if (ac == 1)
-	{
-		if (chdir(get_env(sh, "HOME")))
-		{
-			put_error(strerror(errno));
-			exit = 1;
-		}
-	}
-	else if (ac > 2)
-	{
-		put_error("Too many arguments");
-		exit = 1;
-	}
-	else if (chdir(av[1]))
-	{
-		put_error(strerror(errno));
-		exit = 1;
-	}
-	if (exit == 1)
-		env_add("?=1", sh->env);
-	else
-		env_add("?=0", sh->env);
 }
 
 void	pwd(t_minishell *sh)
