@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 13:10:17 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/29 11:50:44 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 11:52:44 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,15 @@ int				scan_directory(char *bin, char *arg)
 		return (0);
 	}
 	errno = 0;
+	while (1)
+	{
+		errno = 0;
+	}
 	dirent = readdir(dir);
 	while (dirent != 0)
 	{
 		if (!ft_strcmp(dirent->d_name, arg))
 		{
-			while (1)
-			{
-				errno = 0;
-			}
 			closedir(dir);
 			return (1);
 		}
