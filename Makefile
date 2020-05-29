@@ -6,7 +6,7 @@
 #    By: abobas <abobas@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/13 15:12:27 by abobas        #+#    #+#                  #
-#    Updated: 2020/05/29 17:05:02 by abobas        ########   odam.nl          #
+#    Updated: 2020/05/29 18:14:32 by abobas        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ HEADER 	= 		./src/includes/minishell.h
 
 SRC = 			minishell.c \
 				initialization.c \
-				environment.c \
+				environment_1.c \
+				environment_2.c \
 				prompt.c \
 				signals.c \
 				reset.c \

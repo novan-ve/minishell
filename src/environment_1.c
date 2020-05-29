@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   environment.c                                      :+:    :+:            */
+/*   environment_1.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/13 00:53:59 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/29 17:58:50 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 18:13:02 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,35 +19,6 @@ void	env_show(t_minishell *sh)
 {
 	vector_print(sh->env);
 	env_add("?=0", sh->env);
-}
-
-void	export(int ac, char **av, t_minishell *sh)
-{
-	int		i;
-	int		exit;
-	char	*identifier;
-
-	i = 1;
-	exit = 0;
-	if (ac > 1)
-	{
-		while (i < ac)
-		{
-			if (is_env(av[i]) == 1)
-			{
-				identifier = get_identifier(av[i]);
-				strcmp("?", identifier) == 0 ? \
-				put_error("Not a valid identifier") : env_add(av[i], sh->env);
-				exit = (!strcmp("?", identifier)) ? 1 : exit;
-				if (identifier)
-					free(identifier);
-			}
-			else if (is_env(av[i]) == -1)
-				put_error("Not a valid identifier");
-			i++;
-		}
-	}
-	exit == 1 ? env_add("?=1", sh->env) : env_add("?=0", sh->env);
 }
 
 void	env_delete(char *reference, t_vector *v)
@@ -89,7 +60,7 @@ void	unset(int ac, char **av, t_minishell *sh)
 	{
 		while (i < ac)
 		{
-			if (is_env(av[i]) || !strcmp(av[i], "?"))
+			if (is_env(av[i]) || !ft_strcmp(av[i], "?"))
 			{
 				put_error("Not a valid identifier");
 				exit = 1;

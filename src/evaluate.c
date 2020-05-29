@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:50:21 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/29 17:08:10 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 18:14:07 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	evaluate_commands(int arg_count, char **args, t_minishell *sh)
 	else if (!ft_strcmp(args[0], "env"))
 		env_show(sh);
 	else if (!ft_strcmp(args[0], "export"))
-		export(arg_count, args, sh);
+		export_1(arg_count, args, sh);
 	else if (!ft_strcmp(args[0], "unset"))
 		unset(arg_count, args, sh);
 	else

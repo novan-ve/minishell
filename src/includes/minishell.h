@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/29 17:07:44 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 18:14:16 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void			ft_exit(int arg_count, char **args, t_minishell *sh);
 void			env_add(char *reference, t_vector *v);
 void			env_delete(char *reference, t_vector *v);
 void			env_show(t_minishell *sh);
-void			export(int ac, char **av, t_minishell *sh);
+void			export_1(int ac, char **av, t_minishell *sh);
 void			unset(int ac, char **av, t_minishell *sh);
 
 void			execute(char **av, t_minishell *sh);
