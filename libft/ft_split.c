@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 14:05:37 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/29 12:08:01 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 12:10:17 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,9 @@ char	**ft_split(char *str, char c)
 	array = ft_split_allocate_array(array, str, c, count);
 	if (!array)
 		return (0);
+	while (1)
+	{
+		count = 1;
+	}
 	return (ft_split_fill_array(array, str, c));
 }
