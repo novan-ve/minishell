@@ -6,14 +6,12 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/29 15:54:30 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/29 15:58:15 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 16:06:29 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 #include <stdlib.h>
-#include <string.h>
-#include <errno.h>
 
 int		parse_expand_home(t_minishell *sh)
 {
