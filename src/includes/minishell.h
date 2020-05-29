@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 13:46:12 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/29 15:12:24 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 15:58:46 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int				parse_expand(t_minishell *sh);
 int				expand_error(char *dst);
 int				expand(int j, char *dst, char *env, t_minishell *sh);
 int				expand_start_check(int start, char *src, int i);
+int				parse_expand_home(t_minishell *sh);
 char			*expand_arg(t_minishell *sh, char *dst, char *src, int i);
 char			*expand_var(t_minishell *sh, char *src);
 int				parse_pipe(t_minishell *sh);

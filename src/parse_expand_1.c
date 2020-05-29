@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/17 23:45:04 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/28 12:42:02 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/29 15:53:01 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ int		parse_quote_rm(t_minishell *sh)
 
 int		parse_expand(t_minishell *sh)
 {
+	if (!parse_expand_home(sh))
+		return (0);
 	if (!parse_expand_loop(sh))
 		return (0);
 	if (!parse_sanitize(sh))
