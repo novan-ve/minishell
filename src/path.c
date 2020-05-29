@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 13:10:17 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/29 11:42:47 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 11:44:09 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ char			*make_executable(char *bin, char *arg)
 
 int				scan_directory(char *bin, char *arg)
 {
-	DIR					*dir;
-	struct dirent		*dirent;
+	DIR							*dir;
+	static struct dirent		*dirent;
 
 	dir = opendir(bin);
 	if (!dir)
