@@ -6,14 +6,14 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/22 14:05:37 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/29 12:10:17 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 12:14:14 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 #include <stdlib.h>
 
-void	ft_split_free_array(char **array, int j)
+static void		free_array(char **array, int j)
 {
 	j--;
 	while (j >= 0)
@@ -25,7 +25,7 @@ void	ft_split_free_array(char **array, int j)
 	free(array);
 }
 
-int		ft_split_counter(char *str, char c)
+static int		counter(char *str, char c)
 {
 	int i;
 	int count;
@@ -49,7 +49,7 @@ int		ft_split_counter(char *str, char c)
 	return (count);
 }
 
-char	**ft_split_allocate_array(char **array, char *str, char c, int count)
+static char		**allocate_array(char **array, char *str, char c, int count)
 {
 	int	j;
 	int	i;
@@ -70,7 +70,7 @@ char	**ft_split_allocate_array(char **array, char *str, char c, int count)
 		array[j] = (char*)malloc(sizeof(char) * (length + 1));
 		if (!array[j])
 		{
-			ft_split_free_array(array, j);
+			free_array(array, j);
 			return (0);
 		}
 		j++;
@@ -78,7 +78,7 @@ char	**ft_split_allocate_array(char **array, char *str, char c, int count)
 	return (array);
 }
 
-char	**ft_split_fill_array(char **array, char *str, char c)
+static char		**fill_array(char **array, char *str, char c)
 {
 	int	i;
 	int	j;
@@ -98,7 +98,7 @@ char	**ft_split_fill_array(char **array, char *str, char c)
 			array[j] = ft_substr(str, start, i - start);
 			if (!array[j])
 			{
-				ft_split_free_array(array, j);
+				free_array(array, j);
 				return (0);
 			}
 			j++;
@@ -107,24 +107,25 @@ char	**ft_split_fill_array(char **array, char *str, char c)
 	return (array);
 }
 
-char	**ft_split(char *str, char c)
+char			**ft_split(char *str, char c)
 {
 	char	**array;
 	int		count;
 
 	if (!str)
 		return (0);
-	count = ft_split_counter(str, c);
+	count = counter(str, c);
 	array = (char**)malloc(sizeof(char*) * count + 1);
 	if (!array)
 		return (0);
 	array[count] = 0;
-	array = ft_split_allocate_array(array, str, c, count);
+	array = allocate_array(array, str, c, count);
 	if (!array)
 		return (0);
+	array = fill_array(array, str, c);
 	while (1)
 	{
 		count = 1;
 	}
-	return (ft_split_fill_array(array, str, c));
+	return (array);
 }
