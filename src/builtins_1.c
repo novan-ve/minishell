@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/07 15:44:26 by novan-ve      #+#    #+#                 */
-/*   Updated: 2020/05/29 17:07:08 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/30 14:50:06 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,21 @@ void	pwd(t_minishell *sh)
 
 void	ft_exit(int arg_count, char **args, t_minishell *sh)
 {
-	int		i;
 	int		ret;
 
 	ft_printf("exit\n");
 	if (arg_count == 1)
 		exit(0);
-	i = 0;
-	while (args[1][i])
+	ret = ft_atoi(args[1], args[0]);
+	if (args[0][0] == 'f')
 	{
-		if (ft_isalpha(args[1][i]) && !(args[1][i] == '-' && i == 0))
-		{
-			ft_printf("Minishell: ");
-			ft_printf("exit: %s: numeric argument required\n", args[1]);
-			exit(2);
-		}
-		if (!(args[1][i] == '-' && i == 0))
-			ret = ret * 10 + args[1][i] - 48;
-		i++;
+		ft_printf("Minishell: ");
+		ft_printf("exit: %s: numeric argument required\n", args[1]);
+		exit(2);
 	}
-	if (args[1][0] == '-' && (int)(ret / 256) % 2 && arg_count < 3)
+	if (args[0][1] == 'g')
+		ret *= -1;
+	if (args[0][1] == 'g' && arg_count < 3)
 		exit(256 - ret % 256);
 	if (arg_count < 3)
 		exit(ret % 256);
