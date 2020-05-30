@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/29 18:12:31 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/29 18:26:57 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/30 15:19:14 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,28 @@
 void	print_environment_declare(t_vector *v)
 {
 	int		i;
+	int		j;
+	char	*tmp;
 
 	i = 0;
 	while (i < v->total)
 	{
-		ft_printf("declare -x %s\n", v->data[i]);
+		j = i + 1;
+		while (j < v->total)
+		{
+			if (ft_strcmp(v->data[i], v->data[j]) > 0)
+			{
+				tmp = v->data[i];
+				v->data[i] = v->data[j];
+				v->data[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+	while (i < v->total * 2)
+	{
+		ft_printf("declare -x %s\n", v->data[i - v->total]);
 		i++;
 	}
 }
