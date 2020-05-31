@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/29 18:12:31 by abobas        #+#    #+#                 */
-/*   Updated: 2020/05/30 15:19:14 by novan-ve      ########   odam.nl         */
+/*   Updated: 2020/05/31 12:36:50 by novan-ve      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		export_2(int ac, char **av, t_minishell *sh)
 				put_error("Not a valid identifier");
 			else
 				env_add(av[i], sh->env);
-			exit = (!strcmp("?", identifier)) ? 1 : exit;
+			exit = (!ft_strcmp("?", identifier)) ? 1 : exit;
 			if (identifier)
 				free(identifier);
 		}
