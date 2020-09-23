@@ -6,7 +6,7 @@
 /*   By: abobas <abobas@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/19 00:25:13 by abobas        #+#    #+#                 */
-/*   Updated: 2020/06/01 16:36:47 by abobas        ########   odam.nl         */
+/*   Updated: 2020/05/29 15:27:42 by abobas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,16 @@ void	waiting(t_minishell *sh)
 	int		status;
 	int		exit;
 
-	signal_handler_child();
 	while (1)
 	{
 		wait(&status);
 		if (WIFEXITED(status))
 		{
 			exit = WEXITSTATUS(status);
-			exit_status(exit, sh);
-			return ;
-		}
-		if (WIFSIGNALED(status))
-		{
-			ft_printf("\n");
-			exit = WTERMSIG(status);
-			exit_status(exit + 128, sh);
+			if (!exit)
+				env_add("?=0", sh->env);
+			else
+				exit_status(exit, sh);
 			return ;
 		}
 	}
