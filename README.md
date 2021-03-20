@@ -20,3 +20,9 @@ The objective of this project is to create a simple shell, based on bash.
   - Environment variables
   - Return values of commands `$?`
   - ctrl-C, ctrl-D and ctrl-\
+
+## Usage
+```
+make
+./minishell
+```
