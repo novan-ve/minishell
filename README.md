@@ -3,6 +3,12 @@ The objective of this project is to create a simple shell, based on bash.
 
 ![Example](https://raw.githubusercontent.com/novan-ve/minishell/master/screenshots/example.png)
 
+## Usage
+```
+make
+./minishell
+```
+
 ## Builtins
   - echo
   - cd
@@ -20,9 +26,3 @@ The objective of this project is to create a simple shell, based on bash.
   - Environment variables
   - Return values of commands `$?`
   - ctrl-C, ctrl-D and ctrl-\
-
-## Usage
-```
-make
-./minishell
-```
