@@ -3,7 +3,7 @@ The objective of this project is to create a simple shell, based on bash.
 
 ![Example](https://raw.githubusercontent.com/novan-ve/minishell/master/screenshots/example.png)
 
-The following builtins have been reimplemented:
+## Builtins
   - echo
   - cd
   - pwd
@@ -12,7 +12,7 @@ The following builtins have been reimplemented:
   - env
   - exit
 
-It supports:
+## Supports
   - Semicolon `;` to seperate commands
   - Single quotes `'` and double quotes `"`
   - Redirections `< > >>`
