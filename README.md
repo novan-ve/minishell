@@ -1,5 +1,5 @@
 # minishell
-The objective of this project is to create a simple shell, based on bash.
+Custom shell written in C, based on Bash.
 
 ![Example](https://raw.githubusercontent.com/novan-ve/minishell/master/screenshots/example.png)
 
