@@ -1,4 +1,5 @@
 # minishell
+
 Custom shell written in C, based on Bash.
 
 ![Example](https://raw.githubusercontent.com/novan-ve/minishell/master/screenshots/example.png)
